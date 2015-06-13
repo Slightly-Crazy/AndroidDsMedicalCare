@@ -1,6 +1,7 @@
 package ca.hackathon.androiddsmedicalcare;
 
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -46,12 +47,25 @@ public class MainActivity extends ActionBarActivity {
         setAlarm();
     }
 
-    public void onClickBedTime(View view){
+    public void onClickBedtime(View view){
 
-
-        Toast.makeText(getApplicationContext(), "button is clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(this, BedTimeGUI.class);
+        //intent.putExtra("EXTRA_ID", "SOME DATAS");
+        startActivity(intent);
+        //Toast.makeText(getApplicationContext(), "button is clicked", Toast.LENGTH_SHORT).show();
     }
 
+    public void onClickAwakening(View view){
+        Intent intent = new Intent();
+        intent.setClass(this, AwakeningActivity.class);
+        //intent.putExtra("EXTRA_ID", "SOME DATAS");
+        startActivity(intent);
+    }
+
+    public void onClickSBD(View view){
+        Toast.makeText(getApplicationContext(), "SBD button is clicked", Toast.LENGTH_SHORT).show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
