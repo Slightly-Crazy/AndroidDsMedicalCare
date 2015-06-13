@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Happy"
-        android:id="@+id/radioButton"
+        android:id="@+id/happy_radiobutton"
         android:layout_marginTop="34dp"
         android:checked="false"
         android:layout_below="@+id/textView3"
@@ -58,9 +58,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sad"
-        android:id="@+id/radioButton2"
+        android:id="@+id/sad_radiobutton"
         android:checked="false"
-        android:layout_alignTop="@+id/radioButton"
+        android:layout_alignTop="@+id/happy_radiobutton"
         android:layout_alignRight="@+id/timePicker"
         android:layout_alignEnd="@+id/timePicker" />
 
@@ -68,9 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
-        android:id="@+id/button"
+        android:id="@+id/ok_bedtime_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp" />
+        android:layout_marginBottom="36dp"
+        android:onClick="onClickOkButton" />
 
 </RelativeLayout>
