@@ -7,12 +7,15 @@
     tools:context="ca.hackathon.androiddsmedicalcare.AwakeningActivity"
     android:id="@+id/awakeningLayout">
 
-    <TableLayout
-        android:layout_width="match_parent"
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:id="@+id/tableLayout"></TableLayout>
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_column="13"
+        android:layout_gravity="center"
+        android:onClick="onButton" />
 
     <TextView
         android:layout_width="wrap_content"

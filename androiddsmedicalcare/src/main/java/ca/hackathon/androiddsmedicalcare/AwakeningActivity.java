@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 
 public class AwakeningActivity extends ActionBarActivity {
@@ -35,5 +37,11 @@ public class AwakeningActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onButton(View view){
+        Toast.makeText(getApplicationContext(),
+                "Your Message", Toast.LENGTH_LONG).show();
+
     }
 }
