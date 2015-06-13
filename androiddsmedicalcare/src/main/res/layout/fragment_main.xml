@@ -27,21 +27,24 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Bedtime"
+            android:text="Bedtime"
             android:id="@+id/bedButton" android:layout_below="@+id/childNameView"
             android:layout_marginTop="51dp" android:layout_alignRight="@+id/awakeningButton"
             android:layout_alignEnd="@+id/awakeningButton" android:layout_alignLeft="@+id/awakeningButton"
-            android:layout_alignStart="@+id/awakeningButton"/>
+            android:layout_alignStart="@+id/awakeningButton"
+        android:onClick="onClickBedtime" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Awakening"
-            android:id="@+id/awakeningButton" android:layout_below="@+id/bedButton" android:layout_centerHorizontal="true"/>
+            android:id="@+id/awakeningButton" android:layout_below="@+id/bedButton" android:layout_centerHorizontal="true"
+        android:onClick="onClickAwakening" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SBD"
             android:id="@+id/sbdButton" android:layout_below="@+id/awakeningButton"
             android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
-            android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"/>
+            android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
+        android:onClick="onClickSBD" />
 </RelativeLayout>

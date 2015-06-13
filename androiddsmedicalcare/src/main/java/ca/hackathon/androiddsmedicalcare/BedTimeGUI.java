@@ -1,6 +1,7 @@
 package ca.hackathon.androiddsmedicalcare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ public class BedTimeGUI extends Activity {
     }
 
     public void onClickOkButton(View view){
-
+        /*
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
@@ -34,6 +35,11 @@ public class BedTimeGUI extends Activity {
                     // Ninjas rule
                     break;
         }
+        */
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        //intent.putExtra("EXTRA_ID", "SOME DATAS");
+        startActivity(intent);
     }
 
     @Override
