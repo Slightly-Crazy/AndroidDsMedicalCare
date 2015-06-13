@@ -17,6 +17,10 @@ public class Events {
         this.time = time;
     }
 
+    public Events(Time time){
+        this.time = time;
+    }
+
     public void setName(String eventName){
         name = eventName;
     }
