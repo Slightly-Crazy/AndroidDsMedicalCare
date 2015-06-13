@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">AndroidDsMedicalCare</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="button_string">Push</string>
+    <string name="title_activity_result">ResultActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_survey">SurveyActivity</string>
 </resources>
