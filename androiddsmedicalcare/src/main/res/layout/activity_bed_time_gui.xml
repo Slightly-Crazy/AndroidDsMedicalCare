@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="What time did you go to bed last night"
+        android:text="What time did Sara go to bed last night"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
@@ -43,16 +43,34 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp" />
 
-    <ImageButton
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:text="Happy"
+        android:id="@+id/radioButton"
+        android:layout_marginTop="34dp"
+        android:checked="false"
         android:layout_below="@+id/textView3"
         android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/Happy Face"
-        android:layout_toStartOf="@+id/textView"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignStart="@+id/textView3" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sad"
+        android:id="@+id/radioButton2"
+        android:checked="false"
+        android:layout_alignTop="@+id/radioButton"
+        android:layout_alignRight="@+id/timePicker"
+        android:layout_alignEnd="@+id/timePicker" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp" />
 
 </RelativeLayout>
