@@ -27,44 +27,17 @@ public class Bedtime extends Events {
         answers = new ArrayList<String>();
     }
 
-    public void setQuestion(String content){
-        content = "How was your mood?";
-        question = content;
-    }
-
     public String getQuestion(){
         return question;
     }
 
-    public void setAnswers(ArrayList<String> answers){
-        answers.add("Happy");
-        answers.add("Sad");
-        answers.add("Moderate");
-        answers.add("Excited");
-        answers.add("Sleepy");
-        answers.add("Tired");
-        this.answers = answers;
-    }
-
-//    public void setButtons(){
-//        RadioButton happy = new RadioButton("happy");
-//
-//    }
-
 //    public String getAnswer(RadioGroup radioGroup, ArrayList<String> answers){
 //
-//        radioGroup.getCheckedRadioButtonId();
-//        if (radioButton.isClickable() && radioButton.isChecked()) {
-//            for (int i = 0; i < answers.size(); i++){
-//                String item = answers.get(i);
-//                if (item == radioButton.)
-//            }
-//        }
 //
 //
 //
 //    }
-
+//
 
 
 
