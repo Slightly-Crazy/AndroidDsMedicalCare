@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Toast;
 
 import util.AlarmReceiver;
 import util.AlarmSetter;
@@ -45,6 +46,11 @@ public class MainActivity extends ActionBarActivity {
         setAlarm();
     }
 
+    public void onClickBedTime(View view){
+
+
+        Toast.makeText(getApplicationContext(), "button is clicked", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

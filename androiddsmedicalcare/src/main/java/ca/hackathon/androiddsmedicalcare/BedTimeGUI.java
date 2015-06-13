@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
 
 
 public class BedTimeGUI extends Activity {
@@ -12,6 +14,26 @@ public class BedTimeGUI extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_time_gui);
+
+
+    }
+
+    public void onClickOkButton(View view){
+
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.happy_radiobutton:
+                if (checked)
+                    // Pirates are the best
+                    break;
+            case R.id.sad_radiobutton:
+                if (checked)
+                    // Ninjas rule
+                    break;
+        }
     }
 
     @Override
