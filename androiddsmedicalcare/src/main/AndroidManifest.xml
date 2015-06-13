@@ -40,6 +40,10 @@
             android:name=".AwakeningActivity"
             android:label="@string/title_activity_awakening" >
         </activity>
+        <activity
+            android:name=".BedTimeGUI"
+            android:label="@string/title_activity_bed_time_gui" >
+        </activity>
     </application>
 
 </manifest>
