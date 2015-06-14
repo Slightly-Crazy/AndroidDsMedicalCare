@@ -102,4 +102,5 @@
             android:layout_alignBottom="@+id/awakeningButton" android:layout_toLeftOf="@+id/bedButton"
             android:layout_toStartOf="@+id/bedButton" android:onClick="onClickCamera"/>
 
+
 </RelativeLayout>

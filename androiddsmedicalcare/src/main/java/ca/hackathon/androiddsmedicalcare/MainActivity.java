@@ -15,6 +15,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import util.AlarmReceiver;
@@ -30,6 +32,9 @@ import util.UtilServerConnector;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,6 +52,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -59,6 +65,8 @@ public class MainActivity extends ActionBarActivity {
         min = 10;
         snoozeFreq = 30;
         setAlarm();
+        setCurrDate();
+
     }
 
     public void onClickCamera(View view){
@@ -149,7 +157,49 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    public void setCurrDate() {
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            date = extras.getInt("date");
+            month = extras.getInt("month");
+            year = extras.getInt("year");
+        } else {
+            Calendar cal = Calendar.getInstance();
+            date = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            year = cal.get(Calendar.DATE);
+        }
+
+        Log.i("TEXT", "Text");
+
+        TextView textView = (TextView) findViewById(R.id.date);
+        textView.setText(date + " " + month + " " + year);
+    }
+
+    public void setHr(int hr) {
+        this.hr = hr;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setSnoozeFreq(int snoozeFreq) {
+        this.snoozeFreq = snoozeFreq;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -168,5 +218,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+
+
 
 }
