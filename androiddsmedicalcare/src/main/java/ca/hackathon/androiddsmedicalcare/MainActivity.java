@@ -18,8 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import Events.Child;
+import Events.CustomerAdapter;
 import util.AlarmReceiver;
 import util.AlarmSetter;
 
@@ -47,7 +52,30 @@ public class MainActivity extends ActionBarActivity {
         min = 10;
         snoozeFreq = 30;
         setAlarm();
+
+        Child[] children = new Child[2];
+
+        children[0] = new Child("afirst","alast","dob","gender","parentId","bedTime","id");
+        children[1] = new Child("bfirst","blast","dob","gender","parentId","bedTime","id");
+
+        ListAdapter buckysAdapter = new CustomerAdapter(this, children);
+        ListView buckysListView = (ListView) findViewById(R.id.childListView);
+        buckysListView.setAdapter(buckysAdapter);
+
+        buckysListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String food = String.valueOf(parent.getItemAtPosition(position));
+                        Toast.makeText(MainActivity.this, food, Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
     }
+
+
+
+
 
     public void onClickBedtime(View view){
 
@@ -123,5 +151,8 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+
+
+
 
 }
