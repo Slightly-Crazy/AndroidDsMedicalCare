@@ -7,6 +7,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 
 /**
@@ -34,6 +35,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                         .setContentTitle("Reminder")
                         .setContentText("Fill out Sleep survey for Alice")
                         .setPriority(Notification.PRIORITY_MAX)
+                        .setLights(Color.RED, 3000, 3000)
+                        .setVibrate(new long[]{1000, 1000, 1000, 1000})
                         .setAutoCancel(true);  // dismiss notification when pressed on
         // Creates an explicit intent for an Activity in your app
         Intent surveyIntent = new Intent(context, SurveyActivity.class);

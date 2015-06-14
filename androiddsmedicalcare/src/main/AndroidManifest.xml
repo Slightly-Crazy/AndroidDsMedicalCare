@@ -33,9 +33,6 @@
             android:label="@string/title_activity_main" >
         </activity>
 
-        <receiver android:name="util.AlarmReceiver" >
-        </receiver>
-
         <activity
             android:name=".AwakeningActivity"
             android:label="@string/title_activity_awakening" >
