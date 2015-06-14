@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.AlarmManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -34,8 +36,8 @@ import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
-    private AlarmManager alarm;
-    private AlarmSetter alarmSetter;
+    private static AlarmManager am = null;
+    private static AlarmSetter alarmSetter = null;
 
     private int hr;
     private int min;
@@ -129,6 +131,14 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void triggerNotification(View view) {
+        am = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        // Send notification reminders to the user every 15 seconds
+        alarmSetter = new AlarmSetter(0, 1, 15, getApplicationContext(), am);
+        alarmSetter.setAlarm();
+    }
+}
 
     public void setAlarm() {
         alarm = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
