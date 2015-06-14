@@ -267,7 +267,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             ServerConnector se = new ServerConnector();
             try {
-                bool = se.authenticateUser(mEmail, mPassword);
+                if (se.getUser(mEmail).size() > 0) {
+                    bool = se.authenticateUser(mEmail, mPassword);
+                }
+                else {
+                    se.sendParenttoServer(mEmail,mPassword,"default@exampla.ca");
+                }
             }
             catch (Exception e){
             }
