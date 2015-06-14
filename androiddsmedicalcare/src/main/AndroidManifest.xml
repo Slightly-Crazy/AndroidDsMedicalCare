@@ -48,6 +48,10 @@
             android:name=".Summary"
             android:label="@string/title_activity_summary" >
         </activity>
+        <activity
+            android:name=".notes"
+            android:label="@string/title_activity_notes" >
+        </activity>
     </application>
 
 </manifest>
