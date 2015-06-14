@@ -7,7 +7,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context="ca.hackathon.androiddsmedicalcare.MainActivity$PlaceholderFragment"
-    android:id="@+id/">
+    >
 
     <ImageButton
             android:layout_width="wrap_content"
@@ -66,7 +66,8 @@
         android:layout_alignLeft="@+id/summaryButton"
         android:layout_alignStart="@+id/summaryButton"
         android:layout_alignRight="@+id/summaryButton"
-        android:layout_alignEnd="@+id/summaryButton" />
+        android:layout_alignEnd="@+id/summaryButton"
+        android:onClick="onclickBedtime" />
 
     <Button
         android:layout_width="wrap_content"
@@ -74,7 +75,8 @@
         android:text="Awakening"
         android:id="@+id/button2"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickawakening" />
 
     <Button
         android:layout_width="wrap_content"
@@ -85,6 +87,7 @@
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
         android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignEnd="@+id/button2"
+        android:onClick="onclickSummary" />
 
 </RelativeLayout>
