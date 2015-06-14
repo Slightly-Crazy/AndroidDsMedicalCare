@@ -1,17 +1,31 @@
 package ca.hackathon.androiddsmedicalcare;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class SurveyActivity extends Activity {
+    private static PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("SurveyActivity", "ping");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        // Ask to disable alarm in AlarmSetter
+        Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
+        disableAlarmIntent.putExtra("sender", "SurveyActivity");
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
+        // Send Intent immediately
+        AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        alarm.set(AlarmManager.RTC, 0, alarmIntent);
     }
 
     @Override

@@ -24,6 +24,8 @@
             android:name=".SurveyActivity"
             android:label="@string/title_activity_survey" >
         </activity>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmReceiver"></receiver>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmSetter"></receiver>
     </application>
 
 </manifest>
