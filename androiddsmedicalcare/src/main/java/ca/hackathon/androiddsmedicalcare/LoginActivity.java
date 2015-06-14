@@ -272,6 +272,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 }
                 else {
                     se.sendParenttoServer(mEmail,mPassword,"default@exampla.ca");
+                    return true;
                 }
             }
             catch (Exception e){
