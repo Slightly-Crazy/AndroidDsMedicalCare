@@ -33,9 +33,6 @@
             android:label="@string/title_activity_main" >
         </activity>
 
-        <receiver android:name="util.AlarmReceiver" >
-        </receiver>
-
         <activity
             android:name=".AwakeningActivity"
             android:label="@string/title_activity_awakening" >
@@ -52,6 +49,16 @@
             android:name=".notes"
             android:label="@string/title_activity_notes" >
         </activity>
+        <activity
+            android:name=".ResultActivity"
+            android:label="@string/title_activity_result" >
+        </activity>
+        <activity
+            android:name=".SurveyActivity"
+            android:label="@string/title_activity_survey" >
+        </activity>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmReceiver"></receiver>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmSetter"></receiver>
     </application>
 
 </manifest>
