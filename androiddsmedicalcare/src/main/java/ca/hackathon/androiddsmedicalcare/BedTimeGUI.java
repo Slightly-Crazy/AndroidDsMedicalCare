@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TimePicker;
 
 
 public class BedTimeGUI extends Activity {
+    private int radioId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +21,35 @@ public class BedTimeGUI extends Activity {
 
     }
 
-    public void onClickOkButton(View view){
-        /*
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
+
+    public void onClickRadio(View view){
+
+        int radioId = view.getId();
+
+        }
+
+    public void onClickOkButton(View view){
+
+        TimePicker tp = (TimePicker) findViewById(R.id.timePicker);
+
+        int hr = tp.getCurrentHour();
+        int min = tp.getCurrentMinute();
+
+        String Bedtime = hr + ":" + min;
+
+        String mood;
+        switch(radioId) {
             case R.id.happy_radiobutton:
-                if (checked)
-                    // Pirates are the best
+                    mood = "happy";
                     break;
             case R.id.sad_radiobutton:
-                if (checked)
-                    // Ninjas rule
+                    mood = "sad";
                     break;
+            default:
+                break;
         }
-        */
+
         Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
