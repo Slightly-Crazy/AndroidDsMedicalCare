@@ -1,12 +1,13 @@
 package ca.hackathon.androiddsmedicalcare;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ReminderActivity extends ActionBarActivity {
+public class ReminderActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

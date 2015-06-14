@@ -14,6 +14,8 @@ import java.util.Calendar;
 
 public class Summary extends ActionBarActivity {
 
+    String curDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,12 +24,18 @@ public class Summary extends ActionBarActivity {
         CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView1);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
+
             @Override
-            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                Toast.makeText(getApplicationContext(), " " + i + " "+ i1 + " "+ i2, Toast.LENGTH_SHORT).show();
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                int d = dayOfMonth;
+                curDate = String.valueOf(d);
+                Toast.makeText(getApplicationContext(), " " + year + " " + month + " " + dayOfMonth, Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
     }
 
     @Override

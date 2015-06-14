@@ -13,8 +13,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton" android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" android:src="@mipmap/ic_notifications_black_24dp"/>
+        android:src="@mipmap/ic_calendar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#00ffffff"
+        android:layout_alignBottom="@+id/editText2"
+        android:onClick="onClickCalendarButton" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,11 +38,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Summary"
+        android:text="Alerts"
         android:id="@+id/summaryButton"
         android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
         android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
-        android:onClick="onClickSummary"
+        android:onClick="onClickAlert"
         android:layout_below="@+id/awakeningButton" />
 
     <EditText
@@ -81,14 +85,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Summary"
+        android:text="Alerts"
         android:id="@+id/button3"
         android:layout_below="@+id/button2"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_alignEnd="@+id/button2"
-        android:onClick="onclickSummary" />
+        android:onClick="onClickAlert" />
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

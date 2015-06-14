@@ -33,6 +33,12 @@
             android:label="@string/title_activity_main" >
         </activity>
 
+        <activity
+            android:name=".ReminderActivity"
+            android:label="@string/title_activity_reminder" >
+        </activity>
+
+
         <receiver android:name="util.AlarmReceiver" >
         </receiver>
 

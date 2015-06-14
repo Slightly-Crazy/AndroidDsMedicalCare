@@ -41,6 +41,10 @@ public class MainActivity extends ActionBarActivity {
     private int min;
     private int snoozeFreq;
 
+    private int date;
+    private int month;
+    private int year;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,15 +102,23 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onClickCalendarButton (View view) {
+        Toast.makeText(getApplicationContext(), "Summary is clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(this, Summary.class);
+        startActivity(intent);
+    }
+
     public void onClickSBD(View view){
         Toast.makeText(getApplicationContext(), "SBD button is clicked", Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickSummary(View view){
-//        Toast.makeText(getApplicationContext(), "Summary is clicked", Toast.LENGTH_SHORT).show();
+    public void onClickAlert(View view){
+        Toast.makeText(getApplicationContext(), "Alert is clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
-        intent.setClass(this, Summary.class);
+        intent.setClass(this, ReminderActivity.class);
         startActivity(intent);
+//
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
