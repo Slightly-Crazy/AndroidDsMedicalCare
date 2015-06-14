@@ -90,6 +90,12 @@ public class ServerConnector {
     }
 
     private void sendJson(String uri, HashMap map) throws Exception{
+        /*
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        needs to be added to whichever activity is running it.
+         */
+
         String path = rootUrl+uri;
         HttpPost httpost = new HttpPost(path);
         JSONObject holder = getJsonObjectFromMap(map);
