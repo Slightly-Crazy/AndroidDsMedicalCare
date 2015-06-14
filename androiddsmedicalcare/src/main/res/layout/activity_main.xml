@@ -6,6 +6,12 @@
              tools:context="ca.hackathon.androiddsmedicalcare.MainActivity"
              tools:ignore="MergeRootFrame">
 
+    <Button
+        android:text="@string/button_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="triggerNotification"
+        android:layout_gravity="right|bottom" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

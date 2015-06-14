@@ -9,20 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.RadioButton;
-import android.widget.TimePicker;
 
 
-public class BedTimeGUI extends Activity {
-    private int radioId;
+public class SurveyActivity extends Activity {
     private static PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("BedTimeGUI", "ping");
+        Log.i("SurveyActivity", "ping");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bed_time_gui);
+        setContentView(R.layout.activity_survey);
         // Ask to disable alarm in AlarmSetter
         Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
         disableAlarmIntent.putExtra("sender", "SurveyActivity");
@@ -32,45 +28,10 @@ public class BedTimeGUI extends Activity {
         alarm.set(AlarmManager.RTC, 0, alarmIntent);
     }
 
-
-
-    public void onClickRadio(View view){
-
-        int radioId = view.getId();
-
-        }
-
-    public void onClickOkButton(View view){
-
-        TimePicker tp = (TimePicker) findViewById(R.id.timePicker);
-
-        int hr = tp.getCurrentHour();
-        int min = tp.getCurrentMinute();
-
-        String Bedtime = hr + ":" + min;
-
-        String mood;
-        switch(radioId) {
-            case R.id.happy_radiobutton:
-                    mood = "happy";
-                    break;
-            case R.id.sad_radiobutton:
-                    mood = "sad";
-                    break;
-            default:
-                break;
-        }
-
-        Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        //intent.putExtra("EXTRA_ID", "SOME DATAS");
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_bed_time_gui, menu);
+        getMenuInflater().inflate(R.menu.menu_survey, menu);
         return true;
     }
 

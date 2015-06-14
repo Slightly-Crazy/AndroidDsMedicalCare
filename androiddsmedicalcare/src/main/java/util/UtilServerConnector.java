@@ -1,46 +1,89 @@
 package util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
+import org.apache.http.client.methods.HttpGet;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by adrianlim on 15-06-14.
  */
 public class UtilServerConnector {
+    public Bitmap getImageFromServer(String childId) throws Exception{
+        URL url = new URL("http://104.131.137.34/api/picture/?id="+childId);
+        HttpURLConnection conn =
+                (HttpURLConnection) url.openConnection();
 
-    public static void sendFileToServer(String childId, String data) throws UnsupportedEncodingException, ClientProtocolException, IOException{
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost("http://example.com/"+childId);
-// Request parameters and other properties.
-        httpPost.setEntity(new StringEntity(data));
+        if (conn.getResponseCode() != 200) {
+            throw new IOException(conn.getResponseMessage());
+        }
 
-/*
- * Execute the HTTP Request
- */
+        // Buffer the result into a string
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+        String imageData = sb.toString();
+
+        InputStream stream = new ByteArrayInputStream(Base64.decode(sb.toString().getBytes(), Base64.DEFAULT));
+        Bitmap bitmap = BitmapFactory.decodeStream(stream);
+        return bitmap;
+    }
+
+    public static void sendFileToServer(String childId, String data) throws IOException{
+        String urls = "http://104.131.137.34/api/picture/?id="+childId;
+        HttpURLConnection connection = null;
         try {
-            HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity respEntity = response.getEntity();
+            //Create connection
+            URL url = new URL(urls);
+            connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "text/plain");
 
-            if (respEntity != null) {
-                // EntityUtils to get the response content
-                String content =  EntityUtils.toString(respEntity);
+            connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
+            connection.setRequestProperty("Content-Language", "en-US");
+
+            connection.setUseCaches (false);
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            //Send request
+            DataOutputStream wr = new DataOutputStream (connection.getOutputStream ());
+            wr.writeBytes (data);
+            wr.flush ();
+            wr.close ();
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            String line;
+            StringBuffer response = new StringBuffer();
+            while((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
             }
-        } catch (ClientProtocolException e) {
-            // writing exception to log
+            rd.close();
+            System.out.println(response.toString());
+
+        } catch (Exception e) {
+
             e.printStackTrace();
-        } catch (IOException e) {
-            // writing exception to log
-            e.printStackTrace();
+
+        } finally {
+
+            if(connection != null) {
+                connection.disconnect();
+            }
         }
     }
 }

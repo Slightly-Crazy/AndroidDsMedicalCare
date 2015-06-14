@@ -3,9 +3,11 @@ package ca.hackathon.androiddsmedicalcare;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -25,9 +27,6 @@ import android.os.Build;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import util.AlarmReceiver;
-import util.AlarmSetter;
 import util.UtilServerConnector;
 
 import java.io.ByteArrayOutputStream;
@@ -61,6 +60,9 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         hr = 15;
         min = 10;
         snoozeFreq = 30;
@@ -88,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
         btn.setImageBitmap(bp);
 
         try {
-            UtilServerConnector.sendFileToServer("", imageEncoded);
+            UtilServerConnector.sendFileToServer("test1", imageEncoded);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -151,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setAlarm() {
-        alarm = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+        alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarmSetter = new AlarmSetter(hr, min, snoozeFreq, this, alarm);
         alarmSetter.setAlarm();
     }

@@ -50,6 +50,15 @@ public class ServerConnector {
         }
     }
 
+    public void sendParenttoServer(String username,String password, String email) throws Exception{
+        String json = "\"username\": \""+username+"\", \""+password+"\": \"Password1\", \"email\": \""+email+"\",";
+
+        HttpPost hpost = new HttpPost(rootUrl+"parents");
+        hpost.setEntity(new StringEntity(json));
+
+        HttpResponse response = http.execute(hpost);
+    }
+
     public LinkedList<Child> getChildrenOfParent(String parentId) throws IOException{
         JsonElement supertree = getSuperObject(parentId);
         JsonObject obj = supertree.getAsJsonObject();
@@ -81,6 +90,12 @@ public class ServerConnector {
     }
 
     private void sendJson(String uri, HashMap map) throws Exception{
+        /*
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        needs to be added to whichever activity is running it.
+         */
+
         String path = rootUrl+uri;
         HttpPost httpost = new HttpPost(path);
         JSONObject holder = getJsonObjectFromMap(map);
@@ -131,7 +146,7 @@ public class ServerConnector {
             while (iter2.hasNext())
             {
                 Map.Entry pairs2 = (Map.Entry)iter2.next();
-                data.put((String)pairs2.getKey(), (String)pairs2.getValue());
+                data.put((String)pairs2.getKey(), pairs2.getValue());
             }
 
             //puts email and 'foo@bar.com'  together in map

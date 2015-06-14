@@ -99,8 +99,9 @@
             android:id="@+id/portraitButton" android:layout_alignTop="@+id/bedButton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" android:src="@drawable/defaultimage"
-            android:layout_alignBottom="@+id/awakeningButton" android:layout_toLeftOf="@+id/bedButton"
-            android:layout_toStartOf="@+id/bedButton" android:onClick="onClickCamera"/>
+            android:layout_toStartOf="@+id/bedButton" android:onClick="onClickCamera"
+            android:layout_above="@+id/summaryButton"
+            android:layout_toLeftOf="@+id/bedButton"/>
 
 
 </RelativeLayout>
