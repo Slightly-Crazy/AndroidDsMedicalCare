@@ -33,13 +33,13 @@ public class AlarmReceiver extends BroadcastReceiver {
                 new Notification.Builder(context)
                         .setSmallIcon(R.drawable.ic_assignment_ind_white_48dp)
                         .setContentTitle("Reminder")
-                        .setContentText("Fill out Sleep survey for Alice")
+                        .setContentText("Fill out Bedtime survey for Andy")
                         .setPriority(Notification.PRIORITY_MAX)
                         .setLights(Color.RED, 3000, 3000)
                         .setVibrate(new long[]{1000, 1000, 1000, 1000})
                         .setAutoCancel(true);  // dismiss notification when pressed on
         // Creates an explicit intent for an Activity in your app
-        Intent surveyIntent = new Intent(context, SurveyActivity.class);
+        Intent surveyIntent = new Intent(context, BedTimeGUI.class);
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
         // This ensures that navigating backward from the Activity leads out of

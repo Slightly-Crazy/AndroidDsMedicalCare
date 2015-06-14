@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AndroidDsMedicalCare</string>
-    <string name="button_string">Push</string>
+    <string name="button_string">Notify</string>
     <string name="title_activity_result">ResultActivity</string>
 
     <string name="hello_world">Hello world!</string>
