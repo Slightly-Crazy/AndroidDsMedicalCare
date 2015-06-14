@@ -1,6 +1,8 @@
 package util;
 
 import android.content.Entity;
+import android.util.Log;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
@@ -12,14 +14,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.*;
 
 /**
  * Created by adrianlim on 15-06-13.
@@ -31,18 +33,18 @@ public class ServerConnector {
 
     public ServerConnector(){
         http = new DefaultHttpClient();
-        rootUrl = "ds-medical-care.meteor.com/api/";
+        rootUrl = "http://ds-medical-care.meteor.com/api/";
     }
 
     public boolean authenticateUser(String username, String password) throws IOException, JSONException{
-        JSONObject user = getJson("parents/"+username);
-        String serverpassword = user.get("password").toString();
-        if (password.equals(username)){
-            Conf.currentUserId = user.get("_id").toString();
-            Conf.currentUserName = user.get("username").toString();
+        Hashtable<String,String> userList = getUser(username);
+
+        if (userList.get("password").equals(password)){
+            Conf.currentUserId = userList.get("_id");
+            Conf.currentUserName = userList.get("_username");
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
@@ -156,5 +158,48 @@ public class ServerConnector {
         inputStream.close();
         return result;
 
+    }
+
+    public Hashtable<String,String> getUser(String username) throws IOException {
+        URL url = new URL(rootUrl+"/parents/username="+username);
+        HttpURLConnection conn =
+                (HttpURLConnection) url.openConnection();
+
+        if (conn.getResponseCode() != 200) {
+            throw new IOException(conn.getResponseMessage());
+        }
+
+        // Buffer the result into a string
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        String[] output = sb.toString().split("\"");
+
+        Hashtable<String,String> dict = new Hashtable<String, String>();
+        LinkedList<String> list = new LinkedList<String>();
+        int count = 0;
+        int size = output.length/4;
+        for (String out:output){
+            if (count%2==1) {
+                if (out.equals("data")) {
+                }
+                else {
+                    list.add(out);
+                }
+            }
+
+            count++;
+        }
+        for (int x=0; x<list.size()-1;x+=2){
+            dict.put(list.get(x),list.get(x+1));
+        }
+        return dict;
     }
 }
