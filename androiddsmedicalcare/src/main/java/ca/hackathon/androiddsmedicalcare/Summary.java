@@ -6,22 +6,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 
-public class AwakeningActivity extends ActionBarActivity {
+public class Summary extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_awakening);
+        setContentView(R.layout.activity_summary);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_awakening, menu);
+        getMenuInflater().inflate(R.menu.menu_summary, menu);
         return true;
     }
 
@@ -40,33 +38,9 @@ public class AwakeningActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onButton(View view){
-        Toast.makeText(getApplicationContext(),
-                "Your Message", Toast.LENGTH_LONG).show();
-
-    }
-
     public void onClickOkButton(View view){
-        /*
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.happy_radiobutton:
-                if (checked)
-                    // Pirates are the best
-                    break;
-            case R.id.sad_radiobutton:
-                if (checked)
-                    // Ninjas rule
-                    break;
-        }
-        */
-        Intent intent = new Intent();
+        Intent intent= new Intent();
         intent.setClass(this, MainActivity.class);
-        //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
     }
-
 }

@@ -44,6 +44,10 @@
             android:name=".BedTimeGUI"
             android:label="@string/title_activity_bed_time_gui" >
         </activity>
+        <activity
+            android:name=".Summary"
+            android:label="@string/title_activity_summary" >
+        </activity>
     </application>
 
 </manifest>
