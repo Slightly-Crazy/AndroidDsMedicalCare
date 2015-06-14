@@ -12,4 +12,5 @@
     <string name="title_activity_awakening">AwakeningActivity</string>
     <string name="title_activity_summary">Summary</string>
     <string name="title_activity_notes">notes</string>
+    <string name="title_activity_children_profile">childrenProfile</string>
 </resources>

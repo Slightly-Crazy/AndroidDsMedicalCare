@@ -1,6 +1,8 @@
 package ca.hackathon.androiddsmedicalcare;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -102,6 +104,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -119,4 +123,5 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+
 }
