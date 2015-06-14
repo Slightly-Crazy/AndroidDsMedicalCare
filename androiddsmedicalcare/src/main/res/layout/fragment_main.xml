@@ -6,18 +6,9 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="ca.hackathon.androiddsmedicalcare.MainActivity$PlaceholderFragment">
+                tools:context="ca.hackathon.androiddsmedicalcare.MainActivity$PlaceholderFragment"
+    android:id="@+id/">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Name Placeholder"
-            android:id="@+id/childNameView" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/imageButton" android:textSize="28dp"
-            android:layout_toLeftOf="@+id/imageButton" android:layout_toStartOf="@+id/imageButton"
-            android:textAlignment="inherit" android:paddingTop="12dp"/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BedTime"
-            android:id="@+id/bedButton" android:layout_below="@+id/childNameView"
-            android:layout_marginTop="51dp" android:layout_alignRight="@+id/awakeningButton"
+            android:id="@+id/bedButton"
+        android:layout_marginTop="51dp" android:layout_alignRight="@+id/awakeningButton"
             android:layout_alignEnd="@+id/awakeningButton" android:layout_alignLeft="@+id/awakeningButton"
             android:layout_alignStart="@+id/awakeningButton"
         android:onClick="onClickBedtime" />
@@ -39,19 +30,61 @@
             android:text="Awakening"
             android:id="@+id/awakeningButton" android:layout_below="@+id/bedButton" android:layout_centerHorizontal="true"
         android:onClick="onClickAwakening" />
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        android:id="@+id/sbdButton" android:layout_below="@+id/awakeningButton"
-            android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
-            android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
-        android:onClick="onClickSBD" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Summary"
-        android:id="@+id/summaryButton" android:layout_below="@+id/sbdButton"
+        android:id="@+id/summaryButton"
         android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
         android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
-        android:onClick="onClickSummary" />
+        android:onClick="onClickSummary"
+        android:layout_below="@+id/awakeningButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Andy" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText4"
+        android:text="Sara"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BedTime"
+        android:id="@+id/button"
+        android:layout_below="@+id/editText4"
+        android:layout_alignLeft="@+id/summaryButton"
+        android:layout_alignStart="@+id/summaryButton"
+        android:layout_alignRight="@+id/summaryButton"
+        android:layout_alignEnd="@+id/summaryButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Awakening"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_alignEnd="@+id/button2" />
+
 </RelativeLayout>

@@ -44,4 +44,5 @@ public class notes extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
