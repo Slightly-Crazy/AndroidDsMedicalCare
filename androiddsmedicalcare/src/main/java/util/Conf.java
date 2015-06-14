@@ -6,4 +6,6 @@ package util;
 public class Conf {
     public static String currentUserName = "";
     public static String currentUserId = "";
+    public static String currentChildName = "";
+    public static String currentChildId = "";
 }

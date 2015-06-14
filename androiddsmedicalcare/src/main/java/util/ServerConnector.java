@@ -1,12 +1,10 @@
 package util;
 
+import Events.Child;
 import android.content.Entity;
 import android.util.Log;
 import android.widget.Toast;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -52,12 +50,34 @@ public class ServerConnector {
         }
     }
 
+    public LinkedList<Child> getChildrenOfParent(String parentId) throws IOException{
+        JsonElement supertree = getSuperObject(parentId);
+        JsonObject obj = supertree.getAsJsonObject();
+        JsonArray childarray = obj.getAsJsonArray("children");
+        LinkedList<Child> childlist= new LinkedList<Child>();
+        for (int i = 0; i < childarray.size(); i++) {
+            JsonObject childit = childarray.get(i).getAsJsonObject();
+
+            String firstname = childit.get("firstName").toString();
+            String lastName = childit.get("lastName").toString();
+            String dob = childit.get("dob").toString();
+            String gender = childit.get("gender").toString();
+            String parentid = childit.get("parentId").toString();
+            String bedtime = childit.get("bedTime").toString();
+            String _id = childit.get("_id").toString();
+
+            Child child = new Child(firstname,lastName,dob,gender,parentid,bedtime,_id);
+            childlist.add(child);
+        }
+        return childlist;
+    }
+
     public void pushNote(String childId, String date, String note){
         //stuff....
     }
 
     public void sendChildData(String childId, String date, String mood){
-        //Fill this in.
+        //stuff
     }
 
     private void sendJson(String uri, HashMap map) throws Exception{
