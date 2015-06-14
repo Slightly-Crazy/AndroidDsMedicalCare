@@ -66,6 +66,13 @@ public class MainActivity extends ActionBarActivity {
     public void onClickSBD(View view){
         Toast.makeText(getApplicationContext(), "SBD button is clicked", Toast.LENGTH_SHORT).show();
     }
+
+    public void onClickSummary(View view){
+//        Toast.makeText(getApplicationContext(), "Summary is clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(this, Summary.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

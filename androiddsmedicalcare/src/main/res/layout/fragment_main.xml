@@ -47,4 +47,12 @@
             android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
             android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
         android:onClick="onClickSBD" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        android:id="@+id/summaryButton" android:layout_below="@+id/sbdButton"
+        android:layout_alignRight="@+id/awakeningButton" android:layout_alignEnd="@+id/awakeningButton"
+        android:layout_alignLeft="@+id/bedButton" android:layout_alignStart="@+id/bedButton"
+        android:onClick="onClickSummary" />
 </RelativeLayout>
