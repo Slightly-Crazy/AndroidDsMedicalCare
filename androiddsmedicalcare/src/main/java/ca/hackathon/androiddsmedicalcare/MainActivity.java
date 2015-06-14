@@ -1,18 +1,13 @@
 package ca.hackathon.androiddsmedicalcare;
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 
-import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -20,22 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import util.AlarmReceiver;
-import util.AlarmSetter;
 import util.UtilServerConnector;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private AlarmManager alarm;
-    private AlarmSetter alarmSetter;
+    private static AlarmManager alarm = null;
+    private static AlarmSetter alarmSetter = null;
 
     private int hr;
     private int min;
@@ -128,6 +119,13 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void triggerNotification(View view) {
+        alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        // Send notification reminders to the user every 15 seconds
+        alarmSetter = new AlarmSetter(0, 1, 15, getApplicationContext(), alarm);
+        alarmSetter.setAlarm();
     }
 
     public void setAlarm() {
