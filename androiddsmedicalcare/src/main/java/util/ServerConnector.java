@@ -4,6 +4,9 @@ import android.content.Entity;
 import android.util.Log;
 import android.widget.Toast;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -49,43 +52,12 @@ public class ServerConnector {
         }
     }
 
-    public void pushNote(String childName, String date, String note){
+    public void pushNote(String childId, String date, String note){
         //stuff....
     }
 
-    private Dictionary getSuper(String parentId) throws IOException, JSONException{
-        InputStream inputStream = null;
-        String result;
-
-        String url = rootUrl + "superparents/"+parentId;
-        HttpResponse httpResponse = http.execute(new HttpGet(url));
-        inputStream = httpResponse.getEntity().getContent();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-        JSONObject superobject = getJson("superparents/"+parentId);
-        String superstring = superobject.toString();
-
-        Dictionary map = new Gson().fromJson(superstring, new TypeToken<HashMap>() {}.getType());
-        return map;
-    }
-
-    private JSONObject getJson(String uri) throws IOException,JSONException{
-        InputStream inputStream = null;
-        String result = "";
-
-        String url = rootUrl + uri;
-        HttpResponse httpResponse = http.execute(new HttpGet(url));
-        inputStream = httpResponse.getEntity().getContent();
-
-        if(inputStream != null)
-            result = convertInputStreamToString(inputStream);
-        else
-            result = "Did not work!";
-
-        JSONObject jsonResult = new JSONObject(result);
-
-        return jsonResult;
+    public void sendChildData(String childId, String date, String mood){
+        //Fill this in.
     }
 
     private void sendJson(String uri, HashMap map) throws Exception{
@@ -201,5 +173,34 @@ public class ServerConnector {
             dict.put(list.get(x),list.get(x+1));
         }
         return dict;
+    }
+
+    public JsonElement getSuperObject(String parentId) throws IOException {
+        URL url = new URL(rootUrl+"/"+parentId);
+        HttpURLConnection conn =
+                (HttpURLConnection) url.openConnection();
+
+        if (conn.getResponseCode() != 200) {
+            throw new IOException(conn.getResponseMessage());
+        }
+
+        // Buffer the result into a string
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        Boolean childFlag = false;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser parser = new JsonParser();
+        JsonElement je = parser.parse(sb.toString());
+        //String prettyJsonString = gson.toJson(je);
+        //System.out.print(prettyJsonString);
+        return je;
     }
 }
