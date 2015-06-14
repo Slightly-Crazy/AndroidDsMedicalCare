@@ -1,6 +1,8 @@
 package util;
 
 import android.content.Entity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -28,10 +31,44 @@ public class ServerConnector {
 
     public ServerConnector(){
         http = new DefaultHttpClient();
-        rootUrl = "";
+        rootUrl = "ds-medical-care.meteor.com/api/";
     }
 
-    public JSONObject getJson(String uri) throws IOException,JSONException{
+    public boolean authenticateUser(String username, String password) throws IOException, JSONException{
+        JSONObject user = getJson("parents/"+username);
+        String serverpassword = user.get("password").toString();
+        if (password.equals(username)){
+            Conf.currentUserId = user.get("_id").toString();
+            Conf.currentUserName = user.get("username").toString();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void pushNote(String childName, String date, String note){
+        //stuff....
+    }
+
+    private Dictionary getSuper(String parentId) throws IOException, JSONException{
+        InputStream inputStream = null;
+        String result;
+
+        String url = rootUrl + "superparents/"+parentId;
+        HttpResponse httpResponse = http.execute(new HttpGet(url));
+        inputStream = httpResponse.getEntity().getContent();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+        JSONObject superobject = getJson("superparents/"+parentId);
+        String superstring = superobject.toString();
+
+        Dictionary map = new Gson().fromJson(superstring, new TypeToken<HashMap>() {}.getType());
+        return map;
+    }
+
+    private JSONObject getJson(String uri) throws IOException,JSONException{
         InputStream inputStream = null;
         String result = "";
 
@@ -49,7 +86,7 @@ public class ServerConnector {
         return jsonResult;
     }
 
-    public void sendJson(String uri, HashMap map) throws Exception{
+    private void sendJson(String uri, HashMap map) throws Exception{
         String path = rootUrl+uri;
         HttpPost httpost = new HttpPost(path);
         JSONObject holder = getJsonObjectFromMap(map);

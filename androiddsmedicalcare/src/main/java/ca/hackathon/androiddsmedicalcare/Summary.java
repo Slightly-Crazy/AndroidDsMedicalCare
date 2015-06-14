@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class Summary extends ActionBarActivity {
@@ -14,6 +18,16 @@ public class Summary extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
+
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView1);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
+                Toast.makeText(getApplicationContext(), " " + i + " "+ i1 + " "+ i2, Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
