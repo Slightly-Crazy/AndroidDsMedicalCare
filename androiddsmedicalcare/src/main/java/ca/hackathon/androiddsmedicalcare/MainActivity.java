@@ -4,6 +4,8 @@ package ca.hackathon.androiddsmedicalcare;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,16 +14,22 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import util.AlarmReceiver;
 import util.AlarmSetter;
+import util.UtilServerConnector;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,6 +55,31 @@ public class MainActivity extends ActionBarActivity {
         min = 10;
         snoozeFreq = 30;
         setAlarm();
+    }
+
+    public void onClickCamera(View view){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        ImageButton btn = (ImageButton)findViewById(R.id.portraitButton);
+        btn.setImageBitmap(bp);
+
+        try {
+            UtilServerConnector.sendFileToServer("", imageEncoded);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void onClickBedtime(View view){
