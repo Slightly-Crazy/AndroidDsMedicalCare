@@ -18,10 +18,9 @@ import java.io.UnsupportedEncodingException;
  */
 public class UtilServerConnector {
 
-    public static void sendFileToServer(String childId, String data) throws UnsupportedEncodingException, ClientProtocolException, IOException{
+    public static void sendFileToServer(String childId, String data) throws IOException{
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost("http://example.com/"+childId);
-// Request parameters and other properties.
         httpPost.setEntity(new StringEntity(data));
 
 /*
