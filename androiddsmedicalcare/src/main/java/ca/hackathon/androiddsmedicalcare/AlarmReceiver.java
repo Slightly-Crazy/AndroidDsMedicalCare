@@ -31,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // create notification
         Notification.Builder mBuilder =
                 new Notification.Builder(context)
-                        .setSmallIcon(R.drawable.ic_assignment_ind_white_48dp)
+                        .setSmallIcon(R.drawable.ds_photo_avatar_small)
                         .setContentTitle("Reminder")
                         .setContentText("Fill out Bedtime survey for Sara")
                         .setPriority(Notification.PRIORITY_MAX)
