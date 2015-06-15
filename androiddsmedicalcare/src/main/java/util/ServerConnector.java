@@ -47,9 +47,18 @@ public class ServerConnector {
     }
 
     public void sendProblemtoServer(String code, String name) throws Exception{
-        String url = rootUrl + "trackables";
+        String url = rootUrl + "problems";
         HttpPost httpost = new HttpPost(url);
         httpost.setEntity(new StringEntity("code="+code+"&name="+name));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
+    public void sendProblemtoEvent(String time, String trackable,String happiness, String note) throws Exception{
+        String url = rootUrl + "problems";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("timeStamp="+time+"&trackableId="+trackable+"&happinessLevel="+happiness+"&note="+note));
         httpost.setHeader("Accept", "application/json");
         httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
         HttpResponse response = http.execute(httpost);
