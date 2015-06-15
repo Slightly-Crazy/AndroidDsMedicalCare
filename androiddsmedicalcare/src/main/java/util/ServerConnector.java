@@ -37,6 +37,15 @@ public class ServerConnector {
         rootUrl = "http://ds-medical-care.meteor.com/api/";
     }
 
+    public void sendTrackabletoServer(String childid, String notifyat, String promptinterval, String problemid, String isproblem, String severity) throws Exception{
+        String url = rootUrl + "trackables";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("{\"filters\":true}"));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
     public boolean authenticateUser(String username, String password) throws IOException, JSONException{
         Hashtable<String,String> userList = getUser(username);
 
