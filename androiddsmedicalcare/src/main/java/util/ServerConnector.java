@@ -40,11 +40,21 @@ public class ServerConnector {
     public void sendTrackabletoServer(String childid, String notifyat, String promptinterval, String problemid, String isproblem, String severity) throws Exception{
         String url = rootUrl + "trackables";
         HttpPost httpost = new HttpPost(url);
-        httpost.setEntity(new StringEntity("{\"filters\":true}"));
+        httpost.setEntity(new StringEntity("notifyAt="+notifyat+"&promptInterval="+promptinterval+"&childId="+childid+"&problemId="+problemid+"&isProblemForChild"+isproblem));
         httpost.setHeader("Accept", "application/json");
         httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
         HttpResponse response = http.execute(httpost);
     }
+
+    public void sendProblemtoServer(String code, String name) throws Exception{
+        String url = rootUrl + "trackables";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("code="+code+"&name="+name));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
 
     public boolean authenticateUser(String username, String password) throws IOException, JSONException{
         Hashtable<String,String> userList = getUser(username);
