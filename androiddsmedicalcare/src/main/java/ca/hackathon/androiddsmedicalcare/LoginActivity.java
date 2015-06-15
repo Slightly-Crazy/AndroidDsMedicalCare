@@ -26,6 +26,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONObject;
+
 import util.ServerConnector;
 
 import java.util.ArrayList;
@@ -48,6 +51,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private JSONObject parentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -287,7 +291,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
 
-                Intent mainpage = new Intent(getApplicationContext(),MainActivity.class);
+                Intent mainpage = new Intent(getApplicationContext(),Summary.class);
                 startActivity(mainpage);
                 finish();
             } else {
@@ -301,6 +305,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = null;
             showProgress(false);
         }
+
+
     }
 }
 

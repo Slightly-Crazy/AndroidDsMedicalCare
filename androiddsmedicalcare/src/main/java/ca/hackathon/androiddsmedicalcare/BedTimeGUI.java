@@ -88,4 +88,10 @@ public class BedTimeGUI extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClickAddnotesBedTime(View viewe){
+        Intent intent = new Intent();
+        intent.setClass(this,notes.class);
+        startActivity(intent);
+    }
 }

@@ -12,22 +12,24 @@
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton" android:layout_alignParentTop="true"
+            android:id="@+id/imageButton"
         android:src="@mipmap/ic_calendar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:background="#00ffffff"
-        android:layout_alignBottom="@+id/editText2"
-        android:onClick="onClickCalendarButton" />
+        android:onClick="onClickCalendarButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BedTime"
             android:id="@+id/bedButton"
-        android:layout_marginTop="51dp" android:layout_alignRight="@+id/awakeningButton"
-            android:layout_alignEnd="@+id/awakeningButton" android:layout_alignLeft="@+id/awakeningButton"
-            android:layout_alignStart="@+id/awakeningButton"
-        android:onClick="onClickBedtime" />
+        android:onClick="onClickBedtime"
+        android:layout_below="@+id/editText2"
+        android:layout_alignLeft="@+id/awakeningButton"
+        android:layout_alignStart="@+id/awakeningButton"
+        android:layout_alignRight="@+id/awakeningButton"
+        android:layout_alignEnd="@+id/awakeningButton" />
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,54 +47,57 @@
         android:onClick="onClickAlert"
         android:layout_below="@+id/awakeningButton" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:layout_alignParentTop="true"
+        android:text="Andy"
+        android:layout_below="@+id/imageButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="Andy" />
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText4"
         android:text="Sara"
-        android:layout_centerVertical="true" />
+        android:layout_below="@+id/summaryButton"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BedTime"
         android:id="@+id/button"
+        android:onClick="onclickBedtime"
         android:layout_below="@+id/editText4"
         android:layout_alignLeft="@+id/summaryButton"
         android:layout_alignStart="@+id/summaryButton"
         android:layout_alignRight="@+id/summaryButton"
-        android:layout_alignEnd="@+id/summaryButton"
-        android:onClick="onclickBedtime" />
+        android:layout_alignEnd="@+id/summaryButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Awakening"
         android:id="@+id/button2"
+        android:onClick="onClickawakening"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClickawakening" />
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Alerts"
         android:id="@+id/button3"
+        android:onClick="onClickAlert"
         android:layout_below="@+id/button2"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
         android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2"
-        android:onClick="onClickAlert" />
+        android:layout_alignEnd="@+id/button2" />
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,6 +107,19 @@
             android:layout_toStartOf="@+id/bedButton" android:onClick="onClickCamera"
             android:layout_above="@+id/summaryButton"
             android:layout_toLeftOf="@+id/bedButton"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton2"
+        android:src="@drawable/defaultimage"
+        android:onClick="onClickCamera"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:layout_alignBottom="@+id/button2" />
 
 
 </RelativeLayout>

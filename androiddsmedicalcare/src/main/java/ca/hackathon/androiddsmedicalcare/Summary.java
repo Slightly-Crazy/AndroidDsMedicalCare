@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -23,7 +25,7 @@ public class Summary extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView1);
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
@@ -32,15 +34,25 @@ public class Summary extends ActionBarActivity {
 
                 Toast.makeText(getApplicationContext(), " " + year + " " + month + " " + dayOfMonth, Toast.LENGTH_SHORT).show();
 
+
+
+/*
                 Intent intent= new Intent();
                 intent.putExtra("year", year);
                 intent.putExtra("date", dayOfMonth);
                 intent.putExtra("month", month);
                 intent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
         });
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yy-MM-yyyy");
+        String formattedDate = df.format(c.getTime());
+
+        TextView dateToday = (TextView) findViewById(R.id.textView6);
+        dateToday.setText(formattedDate);
 
 
     }
@@ -68,6 +80,9 @@ public class Summary extends ActionBarActivity {
     }
 
     public void onClickOkButton(View view){
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
 
     }
 }

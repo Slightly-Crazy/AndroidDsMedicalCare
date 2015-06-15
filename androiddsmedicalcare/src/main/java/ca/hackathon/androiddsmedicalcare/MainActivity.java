@@ -176,7 +176,7 @@ public class MainActivity extends ActionBarActivity {
         Log.i("TEXT", "Text");
 
         TextView textView = (TextView) findViewById(R.id.date);
-        textView.setText(date + " " + month + " " + year);
+        textView.setText(date + "-" + month + "-" + year);
     }
 
     public void setHr(int hr) {
