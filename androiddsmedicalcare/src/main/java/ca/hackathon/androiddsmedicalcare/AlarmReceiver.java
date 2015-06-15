@@ -33,7 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 new Notification.Builder(context)
                         .setSmallIcon(R.drawable.ic_assignment_ind_white_48dp)
                         .setContentTitle("Reminder")
-                        .setContentText("Fill out Bedtime survey for Andy")
+                        .setContentText("Fill out Bedtime survey for Sara")
                         .setPriority(Notification.PRIORITY_MAX)
                         .setLights(Color.RED, 3000, 3000)
                         .setVibrate(new long[]{1000, 1000, 1000, 1000})
@@ -46,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(SurveyActivity.class);
+        stackBuilder.addParentStack(BedTimeGUI.class);
         // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(surveyIntent);
         PendingIntent startSurveyIntent =

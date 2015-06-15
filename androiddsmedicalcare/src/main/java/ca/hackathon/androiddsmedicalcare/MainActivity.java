@@ -38,8 +38,8 @@ import java.util.Date;
 
 public class MainActivity extends ActionBarActivity {
 
-    private AlarmManager alarm;
-    private AlarmSetter alarmSetter;
+    private static AlarmManager alarm = null;
+    private static AlarmSetter alarmSetter = null;
 
     private int hr;
     private int min;
@@ -155,6 +155,13 @@ public class MainActivity extends ActionBarActivity {
     public void setAlarm() {
         alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarmSetter = new AlarmSetter(hr, min, snoozeFreq, this, alarm);
+    }
+
+    public void triggerNotification(View view) {
+        Log.i("triggerNotification", "ping");
+        alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        // Send notification reminders to the user every 15 seconds
+        alarmSetter = new AlarmSetter(0, 1, 15, getApplicationContext(), alarm);
         alarmSetter.setAlarm();
     }
 

@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.TimePicker;
 
 
@@ -25,7 +24,7 @@ public class BedTimeGUI extends Activity {
         setContentView(R.layout.activity_bed_time_gui);
         // Ask to disable alarm in AlarmSetter
         Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
-        disableAlarmIntent.putExtra("sender", "SurveyActivity");
+        disableAlarmIntent.putExtra("sender", "BedTimeGUI");
         alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
         // Send Intent immediately
         AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));

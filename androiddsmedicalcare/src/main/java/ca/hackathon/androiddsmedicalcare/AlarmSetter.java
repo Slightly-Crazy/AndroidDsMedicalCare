@@ -43,13 +43,16 @@ public class AlarmSetter extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, hr);
         calendar.set(Calendar.MINUTE, min);
+        Log.i("setAlarm", "before");
         alarm.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 1000 * snoozeFreq, alarmIntent);
+        Log.i("setAlarm", "after");
+
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getStringExtra("sender").equals("SurveyActivity")) {
+        if (intent.getStringExtra("sender").equals("BedTimeGUI")) {
             Log.i("AlarmSetter", "disable timer");
             alarm.cancel(alarmIntent);
         }
