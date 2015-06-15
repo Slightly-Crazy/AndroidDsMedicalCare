@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
         btn.setImageBitmap(bp);
 
         try {
-            UtilServerConnector.sendFileToServer("test1", imageEncoded);
+            UtilServerConnector.sendFileToServer("oSLkK58p9MtuMSrDq", imageEncoded);
         }catch(Exception e){
             e.printStackTrace();
         }
