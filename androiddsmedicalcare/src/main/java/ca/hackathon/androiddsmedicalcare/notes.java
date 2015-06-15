@@ -7,11 +7,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import util.Conf;
+
 
 public class notes extends ActionBarActivity {
+    private int date;
+    private int month;
+    private int year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            this.date = extras.getInt("date");
+            this.month = extras.getInt("month");
+            this.year = extras.getInt("year");
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
     }
@@ -45,8 +58,5 @@ public class notes extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-   /* public String getNotes(String parentId, String childId, String date, ){
 
-    }
-*/
 }

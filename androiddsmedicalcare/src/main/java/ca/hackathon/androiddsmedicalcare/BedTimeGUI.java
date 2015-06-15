@@ -12,13 +12,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TimePicker;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import util.Conf;
+
 
 public class BedTimeGUI extends Activity {
     private int radioId;
     private static PendingIntent alarmIntent;
 
+    private int date;
+    private int month;
+    private int year;
+    private String time;
+    private String notes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            this.date = extras.getInt("date");
+           this.month = extras.getInt("month");
+            this.year = extras.getInt("year");
+        }
+
+
         Log.i("BedTimeGUI", "ping");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_time_gui);
@@ -30,7 +53,6 @@ public class BedTimeGUI extends Activity {
         AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         alarm.set(AlarmManager.RTC, 0, alarmIntent);
     }
-
 
 
     public void onClickRadio(View view){
@@ -88,9 +110,59 @@ public class BedTimeGUI extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void setTime(JSONObject event) throws JSONException {
+        JSONObject dateObject = new JSONObject();
+        dateObject = event.getJSONObject("timeStamp");
+
+        //String date = new String();
+        String date = dateObject.getString("label");
+       // "2005-10-05T00:00:00.000Z",
+        int t_index = 0;
+        for (int i = 0; i < date.length(); i++) {
+            char item = date.charAt(i);
+            String item_str = Character.toString(item);
+            if (item_str.equals("T")) {
+                t_index = i;
+            }
+        }
+        //String result = new String();
+        String result = date.substring(t_index,date.length());
+        this.time =  result;
+    }
+
+    public String getTime(){
+        return this.time;
+    }
+
+
+    public void setNotes(JSONObject event) throws JSONException {
+
+        //Conf conf = new Conf();
+        //JSONObject notesObject = new JSONObject();
+        JSONObject notesObject = event.getJSONObject("note");
+
+        //String notes = new String();
+        String notes = notesObject.getString("label");
+        this.notes = notes;
+
+
+
+    }
+
+
+    public String getNotes(){
+        return notes;
+    }
     public void onClickAddnotesBedTime(View viewe){
         Intent intent = new Intent();
-        intent.setClass(this,notes.class);
+        intent.setClass(this, notes.class);
+
+        //intent.putExtra("EXTRA_ID", "SOME DATAS");
+
+        intent.putExtra("year", year);
+        intent.putExtra("date", date);
+        intent.putExtra("month", month);
         startActivity(intent);
     }
 }

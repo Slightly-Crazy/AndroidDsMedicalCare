@@ -101,6 +101,10 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent();
         intent.setClass(this, BedTimeGUI.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
+
+        intent.putExtra("year", year);
+        intent.putExtra("date", date);
+        intent.putExtra("month", month);
         startActivity(intent);
         //Toast.makeText(getApplicationContext(), "button is clicked", Toast.LENGTH_SHORT).show();
     }
@@ -109,6 +113,10 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent();
         intent.setClass(this, AwakeningActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
+
+        intent.putExtra("year", year);
+        intent.putExtra("date", date);
+        intent.putExtra("month", month);
         startActivity(intent);
     }
 

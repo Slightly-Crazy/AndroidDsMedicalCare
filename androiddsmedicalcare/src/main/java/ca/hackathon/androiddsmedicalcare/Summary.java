@@ -35,24 +35,38 @@ public class Summary extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), " " + year + " " + month + " " + dayOfMonth, Toast.LENGTH_SHORT).show();
 
 
+                //BedTimeGUI bedTimeGUI = new BedTimeGUI();
+                //String time = BedTimeGUI.getTime();
 
-/*
+
+                //String notes = BedTimeGUI.getNotes();
+
+
+                //TextView noteTextView = (TextView) findViewById(R.id.textView7);
+               // noteTextView.setText(notes);
+
+
                 Intent intent= new Intent();
                 intent.putExtra("year", year);
                 intent.putExtra("date", dayOfMonth);
                 intent.putExtra("month", month);
                 intent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(intent);*/
+                startActivity(intent);
 
             }
         });
 
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yy-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = df.format(c.getTime());
 
         TextView dateToday = (TextView) findViewById(R.id.textView6);
         dateToday.setText(formattedDate);
+
+        //String time = new String();
+        //String notes = new String();
+
+
 
 
     }
