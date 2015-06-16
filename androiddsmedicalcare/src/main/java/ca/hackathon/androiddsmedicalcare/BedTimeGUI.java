@@ -1,41 +1,65 @@
 package ca.hackathon.androiddsmedicalcare;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.TimePicker;
 
 
 public class BedTimeGUI extends Activity {
+    private int radioId;
+    private static PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("BedTimeGUI", "ping");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_time_gui);
-
-
+        // Ask to disable alarm in AlarmSetter
+        Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
+        disableAlarmIntent.putExtra("sender", "BedTimeGUI");
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
+        // Send Intent immediately
+        AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        alarm.set(AlarmManager.RTC, 0, alarmIntent);
     }
 
-    public void onClickOkButton(View view){
-        /*
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
+
+    public void onClickRadio(View view){
+
+        int radioId = view.getId();
+
+        }
+
+    public void onClickOkButton(View view){
+
+        TimePicker tp = (TimePicker) findViewById(R.id.timePicker);
+
+        int hr = tp.getCurrentHour();
+        int min = tp.getCurrentMinute();
+
+        String Bedtime = hr + ":" + min;
+
+        String mood;
+        switch(radioId) {
             case R.id.happy_radiobutton:
-                if (checked)
-                    // Pirates are the best
+                    mood = "happy";
                     break;
             case R.id.sad_radiobutton:
-                if (checked)
-                    // Ninjas rule
+                    mood = "sad";
                     break;
+            default:
+                break;
         }
-        */
+
         Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
@@ -62,5 +86,11 @@ public class BedTimeGUI extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickAddnotesBedTime(View viewe){
+        Intent intent = new Intent();
+        intent.setClass(this,notes.class);
+        startActivity(intent);
     }
 }

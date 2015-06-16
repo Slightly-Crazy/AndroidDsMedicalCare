@@ -1,9 +1,10 @@
 package util;
 
+import Events.Child;
 import android.content.Entity;
 import android.util.Log;
 import android.widget.Toast;
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -36,6 +37,34 @@ public class ServerConnector {
         rootUrl = "http://ds-medical-care.meteor.com/api/";
     }
 
+    public void sendTrackabletoServer(String childid, String notifyat, String promptinterval, String problemid, String isproblem, String severity) throws Exception{
+        String url = rootUrl + "trackables";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("notifyAt="+notifyat+"&promptInterval="+promptinterval+"&childId="+childid+"&problemId="+problemid+"&isProblemForChild"+isproblem));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
+    public void sendProblemtoServer(String code, String name) throws Exception{
+        String url = rootUrl + "problems";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("code="+code+"&name="+name));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
+    public void sendProblemtoEvent(String time, String trackable,String happiness, String note) throws Exception{
+        String url = rootUrl + "problems";
+        HttpPost httpost = new HttpPost(url);
+        httpost.setEntity(new StringEntity("timeStamp="+time+"&trackableId="+trackable+"&happinessLevel="+happiness+"&note="+note));
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+        HttpResponse response = http.execute(httpost);
+    }
+
+
     public boolean authenticateUser(String username, String password) throws IOException, JSONException{
         Hashtable<String,String> userList = getUser(username);
 
@@ -49,46 +78,52 @@ public class ServerConnector {
         }
     }
 
-    public void pushNote(String childName, String date, String note){
+    public void sendParenttoServer(String username,String password, String email) throws Exception{
+        String json = "\"username\": \""+username+"\", \""+password+"\": \"Password1\", \"email\": \""+email+"\",";
+
+        HttpPost hpost = new HttpPost(rootUrl+"parents");
+        hpost.setEntity(new StringEntity(json));
+
+        HttpResponse response = http.execute(hpost);
+    }
+
+    public LinkedList<Child> getChildrenOfParent(String parentId) throws IOException{
+        JsonElement supertree = getSuperObject(parentId);
+        JsonObject obj = supertree.getAsJsonObject();
+        JsonArray childarray = obj.getAsJsonArray("children");
+        LinkedList<Child> childlist= new LinkedList<Child>();
+        for (int i = 0; i < childarray.size(); i++) {
+            JsonObject childit = childarray.get(i).getAsJsonObject();
+
+            String firstname = childit.get("firstName").toString();
+            String lastName = childit.get("lastName").toString();
+            String dob = childit.get("dob").toString();
+            String gender = childit.get("gender").toString();
+            String parentid = childit.get("parentId").toString();
+            String bedtime = childit.get("bedTime").toString();
+            String _id = childit.get("_id").toString();
+
+            Child child = new Child(firstname,lastName,dob,gender,parentid,bedtime,_id);
+            childlist.add(child);
+        }
+        return childlist;
+    }
+
+    public void pushNote(String childId, String date, String note){
         //stuff....
     }
 
-    private Dictionary getSuper(String parentId) throws IOException, JSONException{
-        InputStream inputStream = null;
-        String result;
-
-        String url = rootUrl + "superparents/"+parentId;
-        HttpResponse httpResponse = http.execute(new HttpGet(url));
-        inputStream = httpResponse.getEntity().getContent();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-        JSONObject superobject = getJson("superparents/"+parentId);
-        String superstring = superobject.toString();
-
-        Dictionary map = new Gson().fromJson(superstring, new TypeToken<HashMap>() {}.getType());
-        return map;
-    }
-
-    private JSONObject getJson(String uri) throws IOException,JSONException{
-        InputStream inputStream = null;
-        String result = "";
-
-        String url = rootUrl + uri;
-        HttpResponse httpResponse = http.execute(new HttpGet(url));
-        inputStream = httpResponse.getEntity().getContent();
-
-        if(inputStream != null)
-            result = convertInputStreamToString(inputStream);
-        else
-            result = "Did not work!";
-
-        JSONObject jsonResult = new JSONObject(result);
-
-        return jsonResult;
+    public void sendChildData(String childId, String date, String mood){
+        //stuff
     }
 
     private void sendJson(String uri, HashMap map) throws Exception{
+        /*
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        needs to be added to whichever activity is running it.
+         */
+
         String path = rootUrl+uri;
         HttpPost httpost = new HttpPost(path);
         JSONObject holder = getJsonObjectFromMap(map);
@@ -139,7 +174,7 @@ public class ServerConnector {
             while (iter2.hasNext())
             {
                 Map.Entry pairs2 = (Map.Entry)iter2.next();
-                data.put((String)pairs2.getKey(), (String)pairs2.getValue());
+                data.put((String)pairs2.getKey(), pairs2.getValue());
             }
 
             //puts email and 'foo@bar.com'  together in map
@@ -201,5 +236,34 @@ public class ServerConnector {
             dict.put(list.get(x),list.get(x+1));
         }
         return dict;
+    }
+
+    public JsonElement getSuperObject(String parentId) throws IOException {
+        URL url = new URL(rootUrl+"/"+parentId);
+        HttpURLConnection conn =
+                (HttpURLConnection) url.openConnection();
+
+        if (conn.getResponseCode() != 200) {
+            throw new IOException(conn.getResponseMessage());
+        }
+
+        // Buffer the result into a string
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        Boolean childFlag = false;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser parser = new JsonParser();
+        JsonElement je = parser.parse(sb.toString());
+        //String prettyJsonString = gson.toJson(je);
+        //System.out.print(prettyJsonString);
+        return je;
     }
 }

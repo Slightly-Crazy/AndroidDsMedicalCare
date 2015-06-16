@@ -3,7 +3,11 @@ package ca.hackathon.androiddsmedicalcare;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,34 +16,42 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+import util.UtilServerConnector;
 
-import Events.Child;
-import Events.CustomerAdapter;
-import util.AlarmReceiver;
-import util.AlarmSetter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private AlarmManager alarm;
-    private AlarmSetter alarmSetter;
+    private static AlarmManager alarm = null;
+    private static AlarmSetter alarmSetter = null;
 
     private int hr;
     private int min;
     private int snoozeFreq;
 
+    private int date;
+    private int month;
+    private int year;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -48,10 +60,14 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         hr = 15;
         min = 10;
         snoozeFreq = 30;
         setAlarm();
+        setCurrDate();
 
         Child[] children = new Child[2];
 
@@ -67,20 +83,30 @@ public class MainActivity extends ActionBarActivity {
             buckysListView.setAdapter(buckysAdapter);
         }
 
-        buckysListView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String food = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(MainActivity.this, food, Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
+    public void onClickCamera(View view){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
+        ImageButton btn = (ImageButton)findViewById(R.id.portraitButton);
+        btn.setImageBitmap(bp);
+
+        try {
+            UtilServerConnector.sendFileToServer("oSLkK58p9MtuMSrDq", imageEncoded);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void onClickBedtime(View view){
 
@@ -98,15 +124,23 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onClickCalendarButton (View view) {
+        Toast.makeText(getApplicationContext(), "Summary is clicked", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(this, Summary.class);
+        startActivity(intent);
+    }
+
     public void onClickSBD(View view){
         Toast.makeText(getApplicationContext(), "SBD button is clicked", Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickSummary(View view){
-//        Toast.makeText(getApplicationContext(), "Summary is clicked", Toast.LENGTH_SHORT).show();
+    public void onClickAlert(View view){
+        Toast.makeText(getApplicationContext(), "Alert is clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
-        intent.setClass(this, Summary.class);
+        intent.setClass(this, ReminderActivity.class);
         startActivity(intent);
+//
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,13 +165,62 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setAlarm() {
-        alarm = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+        alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         alarmSetter = new AlarmSetter(hr, min, snoozeFreq, this, alarm);
+    }
+
+    public void triggerNotification(View view) {
+        Log.i("triggerNotification", "ping");
+        alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        // Send notification reminders to the user every 15 seconds
+        alarmSetter = new AlarmSetter(0, 1, 15, getApplicationContext(), alarm);
         alarmSetter.setAlarm();
     }
 
 
+    public void setCurrDate() {
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            date = extras.getInt("date");
+            month = extras.getInt("month");
+            year = extras.getInt("year");
+        } else {
+            Calendar cal = Calendar.getInstance();
+            date = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            year = cal.get(Calendar.DATE);
+        }
+
+        Log.i("TEXT", "Text");
+
+        TextView textView = (TextView) findViewById(R.id.date);
+        textView.setText(date + "-" + month + "-" + year);
+    }
+
+    public void setHr(int hr) {
+        this.hr = hr;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setSnoozeFreq(int snoozeFreq) {
+        this.snoozeFreq = snoozeFreq;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -156,7 +239,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-
 
 
 

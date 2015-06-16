@@ -45,4 +45,8 @@ public class notes extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+   /* public String getNotes(String parentId, String childId, String date, ){
+
+    }
+*/
 }

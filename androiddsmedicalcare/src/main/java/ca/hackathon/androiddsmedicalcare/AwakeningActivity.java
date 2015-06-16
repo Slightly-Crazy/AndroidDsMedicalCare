@@ -63,10 +63,18 @@ public class AwakeningActivity extends ActionBarActivity {
                     break;
         }
         */
+
         Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
+    }
+
+    public void onClickAddNotesAwakening(View view){
+        Intent intent = new Intent();
+        intent.setClass(this, notes.class);
+        startActivity(intent);
+
     }
 
 }

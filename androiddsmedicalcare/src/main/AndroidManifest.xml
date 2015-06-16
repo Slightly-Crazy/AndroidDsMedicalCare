@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
@@ -33,8 +34,10 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="util.AlarmReceiver" >
-        </receiver>
+        <activity
+            android:name=".ReminderActivity"
+            android:label="@string/title_activity_reminder" >
+        </activity>
 
         <activity
             android:name=".AwakeningActivity"
@@ -52,6 +55,8 @@
             android:name=".notes"
             android:label="@string/title_activity_notes" >
         </activity>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmReceiver"></receiver>
+        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmSetter"></receiver>
     </application>
 
 </manifest>

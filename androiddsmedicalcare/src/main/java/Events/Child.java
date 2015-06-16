@@ -83,9 +83,4 @@ public class Child {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getInfo(){
-        return firstname+" "+lastname;
-
-    }
 }

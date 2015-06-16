@@ -26,6 +26,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONObject;
+
 import util.ServerConnector;
 
 import java.util.ArrayList;
@@ -39,13 +42,6 @@ import java.util.List;
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world", "a:1"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -55,6 +51,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private JSONObject parentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -274,7 +271,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             ServerConnector se = new ServerConnector();
             try {
-                bool = se.authenticateUser(mEmail, mPassword);
+                if (se.getUser(mEmail).size() > 0) {
+                    bool = se.authenticateUser(mEmail, mPassword);
+                }
+                else {
+                    se.sendParenttoServer(mEmail,mPassword,"default@exampla.ca");
+                    return true;
+                }
             }
             catch (Exception e){
             }
@@ -288,7 +291,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
 
-                Intent mainpage = new Intent(getApplicationContext(),MainActivity.class);
+                Intent mainpage = new Intent(getApplicationContext(),Summary.class);
                 startActivity(mainpage);
                 finish();
             } else {
@@ -302,6 +305,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = null;
             showProgress(false);
         }
+
+
     }
 }
 
