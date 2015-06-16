@@ -67,8 +67,9 @@ public class ServerConnector {
 
     public boolean authenticateUser(String username, String password) throws IOException, JSONException{
         Hashtable<String,String> userList = getUser(username);
-        getChildrenOfParent("bgzWZckbQFc8nEYYZ");
-/*http://ds-medical-care.meteor.com/api/superparents/bgzWZckbQFc8nEYYZ*/
+       // Just for debugging, feel free to get rid of this if this is stable
+       // getChildrenOfParent("bgzWZckbQFc8nEYYZ");
+       // http://ds-medical-care.meteor.com/api/superparents/bgzWZckbQFc8nEYYZ
         if (userList.get("password").equals(password)){
             Conf.currentUserId = userList.get("_id");
             Conf.currentUserName = userList.get("_username");
@@ -86,7 +87,8 @@ public class ServerConnector {
         hpost.setEntity(new StringEntity(json));
 
         HttpResponse response = http.execute(hpost);
-        getChildrenOfParent("bgzWZckbQFc8nEYYZ");
+        //Just for debugging, sorry!
+        //        getChildrenOfParent("bgzWZckbQFc8nEYYZ");
 
     }
 
