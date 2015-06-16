@@ -60,7 +60,12 @@ public class MainActivity extends ActionBarActivity {
 
         ListAdapter buckysAdapter = new CustomerAdapter(this, children);
         ListView buckysListView = (ListView) findViewById(R.id.childListView);
-        buckysListView.setAdapter(buckysAdapter);
+        System.out.println("BUBUBUBUBUBUBUBUB#########");
+        System.out.println(buckysListView);
+
+        if (buckysListView != null){
+            buckysListView.setAdapter(buckysAdapter);
+        }
 
         buckysListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener(){
