@@ -1,5 +1,6 @@
 package ca.hackathon.androiddsmedicalcare;
 
+import Events.User;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import util.Conf;
 import util.ServerConnector;
 
 import java.util.ArrayList;
@@ -270,9 +272,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             Boolean bool = false;
 
             ServerConnector se = new ServerConnector();
+
+
             try {
-                if (se.getUser(mEmail).size() > 0) {
-                    bool = se.authenticateUser(mEmail, mPassword);
+                User user = se.getUser(mEmail);
+                if (user.getUsername().length() > 0) {
+                    if (user.getPassword().equals(mPassword)){
+                        bool = true;
+                        Conf.getmInstance().currentUserName = user.getUsername();
+                        Conf.getmInstance().currentUserId = user.get_id();
+                    }
                 }
                 else {
                     se.sendParenttoServer(mEmail,mPassword,"default@exampla.ca");
@@ -280,6 +289,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 }
             }
             catch (Exception e){
+                e.printStackTrace();
             }
             return bool;
         }
@@ -290,7 +300,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-
                 Intent mainpage = new Intent(getApplicationContext(),Summary.class);
                 startActivity(mainpage);
                 finish();

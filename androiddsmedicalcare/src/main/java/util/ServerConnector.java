@@ -1,6 +1,7 @@
 package util;
 
 import Events.Child;
+import Events.User;
 import android.content.Entity;
 import android.util.Log;
 import android.widget.Toast;
@@ -55,7 +56,7 @@ public class ServerConnector {
         HttpResponse response = http.execute(httpost);
     }
 
-    public void sendProblemtoEvent(String time, String trackable,String happiness, String note) throws Exception{
+    public void sendEventtoServer(String time, String trackable,String happiness, String note) throws Exception{
         String url = rootUrl + "problems";
         HttpPost httpost = new HttpPost(url);
         httpost.setEntity(new StringEntity("timeStamp="+time+"&trackableId="+trackable+"&happinessLevel="+happiness+"&note="+note));
@@ -65,14 +66,13 @@ public class ServerConnector {
     }
 
 
-    public boolean authenticateUser(String username, String password) throws IOException, JSONException{
-        Hashtable<String,String> userList = getUser(username);
+    public boolean authenticateUser(User user, String password) throws IOException, JSONException{
        // Just for debugging, feel free to get rid of this if this is stable
        // getChildrenOfParent("bgzWZckbQFc8nEYYZ");
        // http://ds-medical-care.meteor.com/api/superparents/bgzWZckbQFc8nEYYZ
-        if (userList.get("password").equals(password)){
-            Conf.currentUserId = userList.get("_id");
-            Conf.currentUserName = userList.get("_username");
+        if (user.getPassword().equals(password)){
+            Conf.getmInstance().currentUserId = user.get_id();
+            Conf.getmInstance().currentUserName = user.getUsername();
             return true;
         }
         else {
@@ -200,8 +200,8 @@ public class ServerConnector {
 
     }
 
-    public Hashtable<String,String> getUser(String username) throws IOException {
-        URL url = new URL(rootUrl+"/parents/username="+username);
+    public User getUser(String username) throws IOException {
+        URL url = new URL(rootUrl + "parents/username=" + username);
         HttpURLConnection conn =
                 (HttpURLConnection) url.openConnection();
 
@@ -214,34 +214,33 @@ public class ServerConnector {
                 new InputStreamReader(conn.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
-        while ((line = rd.readLine()) != null) {
+        Boolean childFlag = false;
+        for (int counter=0;counter<11;counter++) {
+            line = rd.readLine();
             sb.append(line);
         }
         rd.close();
         conn.disconnect();
 
-        String[] output = sb.toString().split("\"");
 
-        Hashtable<String,String> dict = new Hashtable<String, String>();
-        LinkedList<String> list = new LinkedList<String>();
-        int count = 0;
-        int size = output.length/4;
-        for (String out:output){
-            if (count%2==1) {
-                if (out.equals("data")) {
-                }
-                else {
-                    list.add(out);
-                }
-            }
+        JsonParser parser = new JsonParser();
+        JsonElement je = parser.parse(sb.toString());
 
-            count++;
-        }
-        for (int x=0; x<list.size()-1;x+=2){
-            dict.put(list.get(x),list.get(x+1));
-        }
-        return dict;
+        JsonObject jo = je.getAsJsonObject();
+        JsonArray data = jo.getAsJsonArray("data");
+
+
+        JsonObject user = data.get(0).getAsJsonObject();
+
+        String newusername = user.get("username").toString().replace("\"","");
+        String password = user.get("password").toString().replace("\"", "");
+        String email = user.get("email").toString().replace("\"", "");
+        String _id = user.get("_id").toString().replace("\"","");
+
+        User u = new User(newusername, password, email, _id);
+        return u;
     }
+
 
     public JsonElement getSuperObject(String parentId) throws IOException {
         URL url = new URL(rootUrl+"superparents/"+parentId);
