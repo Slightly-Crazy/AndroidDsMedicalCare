@@ -32,8 +32,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="How was your mood before bed?"
         android:id="@+id/textView3"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/timePicker" android:layout_centerHorizontal="true" android:layout_marginTop="103dp"/>
 
     <TimePicker
         android:layout_width="wrap_content"
@@ -48,11 +47,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp"
-        android:id="@+id/radioGroup2">
+                android:layout_alignParentStart="true"
+                android:id="@+id/radioGroup2" android:layout_below="@+id/textView3"
+                android:layout_centerHorizontal="true">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,10 +86,11 @@
         android:layout_height="wrap_content"
         android:text="Notes"
         android:id="@+id/textView8"
-        android:layout_below="@+id/radioGroup2"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_alignRight="@+id/timePicker"
-        android:layout_alignEnd="@+id/timePicker" />
+        android:layout_below="@+id/radioGroup2" android:layout_centerHorizontal="true"/>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Add notes"
+            android:id="@+id/addNotesButton"
+            android:onClick="onClickAddNotesAwakening"
+            android:layout_below="@+id/textView8" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

@@ -35,14 +35,6 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
-
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -113,5 +105,10 @@
         android:layout_alignLeft="@+id/nightmare_radiobutton"
         android:layout_alignStart="@+id/nightmare_radiobutton"
         android:onClick="onClickAddNotesAwakening" />
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
+        android:layout_below="@+id/textView2" android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
