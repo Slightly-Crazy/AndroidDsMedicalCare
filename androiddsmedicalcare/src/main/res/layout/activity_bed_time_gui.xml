@@ -75,7 +75,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ok"
+        android:text="Done"
         android:id="@+id/ok_bedtime_button"
         android:onClick="onClickOkButton"
         android:layout_alignParentBottom="true"
