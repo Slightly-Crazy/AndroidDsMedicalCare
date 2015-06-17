@@ -65,7 +65,7 @@ public class AwakeningActivity extends ActionBarActivity {
         */
 
         Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
+        intent.setClass(this, MainActivity1.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
     }

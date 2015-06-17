@@ -41,7 +41,7 @@ public class Summary extends ActionBarActivity {
                 intent.putExtra("year", year);
                 intent.putExtra("date", dayOfMonth);
                 intent.putExtra("month", month);
-                intent.setClass(getApplicationContext(), MainActivity.class);
+                intent.setClass(getApplicationContext(), MainActivity1.class);
                 startActivity(intent);*/
 
             }
