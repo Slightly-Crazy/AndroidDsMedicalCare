@@ -95,13 +95,17 @@ public class MyRecyclerViewAdapter extends RecyclerView
         holder.trackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Dunno what goes here right now
+                Intent intent = new Intent(v.getContext(), SurveyActivity.class);
+                intent.putExtra("childId",childid);
+                v.getContext().startActivity(intent);
             }
         });
         holder.alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Dunno
+                Intent intent = new Intent(v.getContext(), ReminderActivity.class);
+                intent.putExtra("childId",childid);
+                v.getContext().startActivity(intent);
             }
         });
         holder.photoButton.setOnClickListener(new View.OnClickListener() {
