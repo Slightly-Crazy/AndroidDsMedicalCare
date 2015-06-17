@@ -1,6 +1,7 @@
 package ca.hackathon.androiddsmedicalcare;
 
 
+import Events.Child;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -27,6 +28,8 @@ import android.os.Build;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import util.Conf;
+import util.ServerConnector;
 import util.UtilServerConnector;
 
 import java.io.ByteArrayOutputStream;
@@ -34,6 +37,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,7 +55,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -63,12 +66,13 @@ public class MainActivity extends ActionBarActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        String parentId = Conf.getmInstance().currentUserId;
+
         hr = 15;
         min = 10;
         snoozeFreq = 30;
         setAlarm();
         setCurrDate();
-
     }
 
     public void onClickCamera(View view){

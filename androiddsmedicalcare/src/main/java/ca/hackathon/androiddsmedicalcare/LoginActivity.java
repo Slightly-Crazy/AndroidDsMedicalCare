@@ -1,5 +1,6 @@
 package ca.hackathon.androiddsmedicalcare;
 
+import Events.Child;
 import Events.User;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -34,6 +35,7 @@ import util.Conf;
 import util.ServerConnector;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 

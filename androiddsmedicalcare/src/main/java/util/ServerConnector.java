@@ -66,10 +66,12 @@ public class ServerConnector {
     }
 
 
-    public boolean authenticateUser(User user, String password) throws IOException, JSONException{
+    public void authenticateUser(User user, String password) throws IOException, JSONException{
        // Just for debugging, feel free to get rid of this if this is stable
-       // getChildrenOfParent("bgzWZckbQFc8nEYYZ");
+       //LinkedList<Child> test = getChildrenOfParent("bgzWZckbQFc8nEYYZ");
+       //test.size();
        // http://ds-medical-care.meteor.com/api/superparents/bgzWZckbQFc8nEYYZ
+        /*
         if (user.getPassword().equals(password)){
             Conf.getmInstance().currentUserId = user.get_id();
             Conf.getmInstance().currentUserName = user.getUsername();
@@ -78,6 +80,7 @@ public class ServerConnector {
         else {
             return false;
         }
+        */
     }
 
     public void sendParenttoServer(String username,String password, String email) throws Exception{
@@ -88,17 +91,20 @@ public class ServerConnector {
 
         HttpResponse response = http.execute(hpost);
         //Just for debugging, sorry!
-        //        getChildrenOfParent("bgzWZckbQFc8nEYYZ");
+        //      getChildrenOfParent("bgzWZckbQFc8nEYYZ");
 
     }
 
     public LinkedList<Child> getChildrenOfParent(String parentId) throws IOException{
         JsonElement supertree = getSuperObject(parentId);
         JsonObject obj = supertree.getAsJsonObject();
-        JsonArray childarray = obj.getAsJsonArray("children");
+        JsonElement data = obj.get("data");
+        JsonObject dataobj = data.getAsJsonObject();
+        JsonArray childarray = dataobj.getAsJsonArray("children");
         LinkedList<Child> childlist= new LinkedList<Child>();
         for (int i = 0; i < childarray.size(); i++) {
-            JsonObject childit = childarray.get(i).getAsJsonObject();
+            JsonElement childje = childarray.get(i);
+            JsonObject childit = childje.getAsJsonObject();
 
             String firstname = childit.get("firstName").toString();
             String lastName = childit.get("lastName").toString();
