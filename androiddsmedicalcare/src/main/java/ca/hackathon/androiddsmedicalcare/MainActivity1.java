@@ -62,7 +62,7 @@ public class MainActivity1 extends ActionBarActivity {
         ServerConnector se = new ServerConnector();
 
         try {
-            children = se.getChildrenOfParent(Conf.getmInstance().currentUserId);
+            children = se.getChildrenOfParent(Conf.getmInstance().currentUserId, getApplicationContext());
         } catch (IOException e){
             e.printStackTrace();
         }

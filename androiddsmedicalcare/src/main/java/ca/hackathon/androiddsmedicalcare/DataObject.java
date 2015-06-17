@@ -1,6 +1,7 @@
 package ca.hackathon.androiddsmedicalcare;
 
 import Events.Child;
+import android.graphics.Bitmap;
 
 /**
  * Created by adrianlim on 15-06-16.
@@ -8,10 +9,21 @@ import Events.Child;
 public class DataObject {
     private String name;
     private String childid;
+    private Bitmap image;
 
     DataObject (Child child){
         name = child.getFirstname();
         childid = child.getId();
+        image = child.getImage();
+
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getName() {

@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         StrictMode.setThreadPolicy(policy);
 
         try{
-            childList = se.getChildrenOfParent(Conf.getmInstance().currentUserId);
+            childList = se.getChildrenOfParent(Conf.getmInstance().currentUserId, getApplicationContext());
         }  catch (IOException e){
             e.printStackTrace();
         }

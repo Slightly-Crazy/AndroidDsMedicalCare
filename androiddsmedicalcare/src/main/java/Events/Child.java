@@ -1,5 +1,9 @@
 package Events;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import util.UtilStorage;
+
 /**
  * Created by wendywang on 15-06-13.
  */
@@ -11,6 +15,7 @@ public class Child {
     private String parentId;
     private String bedTime;
     private String id;
+    private Bitmap image;
 
     public Child(String firstname,
                  String lastname,
@@ -26,6 +31,32 @@ public class Child {
            this.parentId = parentId;
            this.bedTime = bedTime;
            this.id = id;
+    }
+
+    public Child(String firstname,
+                 String lastname,
+                 String dob,
+                 String gender,
+                 String parentId,
+                 String bedTime,
+                 String id,
+                 Context context){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dob = dob;
+        this.gender = gender;
+        this.parentId = parentId;
+        this.bedTime = bedTime;
+        this.id = id;
+        this.image = UtilStorage.loadImageFromStorage(context,id);
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getFirstname() {

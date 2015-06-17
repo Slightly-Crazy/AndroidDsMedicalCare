@@ -33,12 +33,10 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
-
         <activity
             android:name=".ReminderActivity"
             android:label="@string/title_activity_reminder" >
         </activity>
-
         <activity
             android:name=".AwakeningActivity"
             android:label="@string/title_activity_awakening" >
@@ -55,8 +53,14 @@
             android:name=".notes"
             android:label="@string/title_activity_notes" >
         </activity>
-        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmReceiver"></receiver>
-        <receiver android:name="ca.hackathon.androiddsmedicalcare.AlarmSetter"></receiver>
+
+        <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".AlarmSetter" />
+
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
     </application>
 
 </manifest>

@@ -4,7 +4,10 @@ package ca.hackathon.androiddsmedicalcare;
  * Created by adrianlim on 15-06-16.
  */
 import android.app.AlarmManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Camera;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import util.UtilStorage;
 
 import java.util.ArrayList;
 
@@ -76,6 +80,10 @@ public class MyRecyclerViewAdapter extends RecyclerView
         final String childid = mDataset.get(position).getChildid();
 
         holder.name.setText(mDataset.get(position).getName());
+        if (((mDataset.get(position)).getImage()) != null) {
+            holder.photoButton.setImageBitmap((mDataset.get(position)).getImage());
+        }
+
         holder.bedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +119,9 @@ public class MyRecyclerViewAdapter extends RecyclerView
         holder.photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Need special activity for this maybe.
+                Intent intent = new Intent(v.getContext(), CameraActivity.class);
+                intent.putExtra("childId",childid);
+                v.getContext().startActivity(intent);
             }
         });
     }

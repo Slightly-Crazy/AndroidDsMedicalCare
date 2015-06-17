@@ -2,6 +2,7 @@ package util;
 
 import Events.Child;
 import Events.User;
+import android.content.Context;
 import android.content.Entity;
 import android.util.Log;
 import android.widget.Toast;
@@ -115,6 +116,31 @@ public class ServerConnector {
             String _id = childit.get("_id").toString();
 
             Child child = new Child(firstname,lastName,dob,gender,parentid,bedtime,_id);
+            childlist.add(child);
+        }
+        return childlist;
+    }
+
+    public LinkedList<Child> getChildrenOfParent(String parentId, Context context) throws IOException{
+        JsonElement supertree = getSuperObject(parentId);
+        JsonObject obj = supertree.getAsJsonObject();
+        JsonElement data = obj.get("data");
+        JsonObject dataobj = data.getAsJsonObject();
+        JsonArray childarray = dataobj.getAsJsonArray("children");
+        LinkedList<Child> childlist= new LinkedList<Child>();
+        for (int i = 0; i < childarray.size(); i++) {
+            JsonElement childje = childarray.get(i);
+            JsonObject childit = childje.getAsJsonObject();
+
+            String firstname = childit.get("firstName").toString().replace("\"","");
+            String lastName = childit.get("lastName").toString().replace("\"", "");
+            String dob = childit.get("dob").toString().replace("\"", "");
+            String gender = childit.get("gender").toString().replace("\"", "");
+            String parentid = childit.get("parentId").toString().replace("\"", "");
+            String bedtime = childit.get("bedTime").toString().replace("\"", "");
+            String _id = childit.get("_id").toString().replace("\"","");
+
+            Child child = new Child(firstname,lastName,dob,gender,parentid,bedtime,_id,context);
             childlist.add(child);
         }
         return childlist;
