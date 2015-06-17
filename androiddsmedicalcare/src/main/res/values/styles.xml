@@ -3,6 +3,29 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBarStyle</item>
+        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="android:buttonStyle">@style/ButtonText</item>
+        <item name="android:layout_margin">2dp</item>
+
     </style>
 
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/action_bar_background</item>
+    </style>
+    <style name="AppTheme.ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+        <item name="android:background">@color/action_bar_background</item>
+    </style>
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/action_bar_text_color</item>
+    </style>
+
+    <style name="ButtonText" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:background">@color/button_background</item>
+        <item name="android:padding">12dp</item>
+
+
+    </style>
 </resources>
