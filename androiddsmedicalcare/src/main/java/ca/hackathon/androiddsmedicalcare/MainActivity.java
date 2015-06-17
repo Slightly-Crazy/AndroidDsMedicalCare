@@ -53,6 +53,8 @@ public class MainActivity extends ActionBarActivity {
     private int month;
     private int year;
 
+    private LinkedList<Child> children;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +68,13 @@ public class MainActivity extends ActionBarActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        String parentId = Conf.getmInstance().currentUserId;
+        ServerConnector se = new ServerConnector();
+
+        try {
+            children = se.getChildrenOfParent(Conf.getmInstance().currentUserId);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
         hr = 15;
         min = 10;
