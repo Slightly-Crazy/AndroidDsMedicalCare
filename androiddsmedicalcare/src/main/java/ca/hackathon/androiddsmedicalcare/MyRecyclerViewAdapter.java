@@ -3,6 +3,8 @@ package ca.hackathon.androiddsmedicalcare;
 /**
  * Created by adrianlim on 15-06-16.
  */
+import android.app.AlarmManager;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -71,7 +73,43 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
+        final String childid = mDataset.get(position).getChildid();
+
         holder.name.setText(mDataset.get(position).getName());
+        holder.bedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BedTimeGUI.class);
+                intent.putExtra("childId",childid);
+                v.getContext().startActivity(intent);
+            }
+        });
+        holder.awakeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AwakeningActivity.class);
+                intent.putExtra("childId", childid);
+                v.getContext().startActivity(intent);
+            }
+        });
+        holder.trackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Dunno what goes here right now
+            }
+        });
+        holder.alarmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Dunno
+            }
+        });
+        holder.photoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Need special activity for this maybe.
+            }
+        });
     }
 
     public void addItem(DataObject dataObj, int index) {

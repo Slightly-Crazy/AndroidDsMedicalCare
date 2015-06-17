@@ -25,7 +25,7 @@ public class notes extends ActionBarActivity {
 
     public void onclick_okbutton(View view){
         Intent intent = new Intent();
-        intent.setClass(this, MainActivity1.class);
+        intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
     }

@@ -6,15 +6,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
-public class AwakeningActivity extends ActionBarActivity {
+public class AwakeningActivity extends ActionBarActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_awakening);
+
+        final Button button = (Button) findViewById(R.id.onclickAddnotsAwakening);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent noteactivity = new Intent(v.getContext(),notes.class);
+                startActivity(noteactivity);
+            }
+        });
     }
 
 
@@ -65,7 +75,7 @@ public class AwakeningActivity extends ActionBarActivity {
         */
 
         Intent intent = new Intent();
-        intent.setClass(this, MainActivity1.class);
+        intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
     }

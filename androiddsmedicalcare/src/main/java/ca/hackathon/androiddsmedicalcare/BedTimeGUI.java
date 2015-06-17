@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TimePicker;
 
 
@@ -23,12 +24,26 @@ public class BedTimeGUI extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bed_time_gui);
         // Ask to disable alarm in AlarmSetter
-        Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
+
+
+        /*Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
         disableAlarmIntent.putExtra("sender", "BedTimeGUI");
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
+        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);*/
+
+
         // Send Intent immediately
-        AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+
+        /*AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         alarm.set(AlarmManager.RTC, 0, alarmIntent);
+        */
+
+        final Button button = (Button) findViewById(R.id.addNotesButton);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent noteactivity = new Intent(v.getContext(),notes.class);
+                startActivity(noteactivity);
+            }
+        });
     }
 
 
@@ -60,8 +75,10 @@ public class BedTimeGUI extends Activity {
                 break;
         }
 
+        //send result to server here
+
         Intent intent = new Intent();
-        intent.setClass(this, MainActivity1.class);
+        intent.setClass(this, MainActivity.class);
         //intent.putExtra("EXTRA_ID", "SOME DATAS");
         startActivity(intent);
     }
@@ -88,7 +105,7 @@ public class BedTimeGUI extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickAddnotesBedTime(View viewe){
+    public void onClickAddnotesBedTime(View view){
         Intent intent = new Intent();
         intent.setClass(this,notes.class);
         startActivity(intent);
