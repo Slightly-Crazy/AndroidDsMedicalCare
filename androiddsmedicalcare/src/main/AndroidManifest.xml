@@ -53,6 +53,10 @@
             android:name=".notes"
             android:label="@string/title_activity_notes" >
         </activity>
+        <activity
+                android:name=".SurveyActivity"
+                android:label="@string/title_activity_survey" >
+        </activity>
 
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".AlarmSetter" />

@@ -1,58 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="?android:attr/selectableItemBackground"
-              android:orientation="vertical" android:paddingTop="5dp" android:paddingBottom="5dp">
+<android:android.support.v7.widget.CardView
+        android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#ffffffff"
+        android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Name Placeholder"
-            android:id="@+id/nameView"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/alarmButton" />
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/alarmButton"
-            android:src="@mipmap/ic_notifications_black_24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/photoButton"
-            android:src="@mipmap/ic_launcher"
-        android:layout_below="@+id/alarmButton"
-        android:layout_alignLeft="@+id/nameView"
-        android:layout_alignStart="@+id/nameView" />
-    <Button
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:text="Bedtime"
-            android:id="@+id/bedButton"
-        android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-        android:layout_alignTop="@+id/photoButton"
-        android:layout_centerHorizontal="true" />
-    <Button android:layout_width="180dp" android:layout_height="wrap_content" android:text="Awakening"
-            android:id="@+id/awakeButton"
-            android:layout_below="@+id/bedButton"
-        android:textColor="#ffffffff"
-            android:paddingTop="5dp" android:paddingBottom="5dp"
-        android:layout_alignRight="@+id/bedButton"
-        android:layout_alignEnd="@+id/bedButton"
-        android:layout_alignLeft="@+id/bedButton"
-        android:layout_alignStart="@+id/bedButton" />
-    <Button android:layout_width="180dp" android:layout_height="wrap_content" android:text="Survey"
-            android:id="@+id/trackButton"
-            android:layout_below="@+id/awakeButton" android:layout_alignRight="@+id/awakeButton"
-            android:layout_alignEnd="@+id/awakeButton"
-        android:textColor="#ffffffff"
-            android:paddingTop="5dp" android:paddingBottom="5dp"
-        android:layout_alignLeft="@+id/awakeButton"
-        android:layout_alignStart="@+id/awakeButton" />
-</RelativeLayout>
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="?android:attr/selectableItemBackground"
+                              android:orientation="vertical" android:paddingTop="5dp" android:paddingBottom="5dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="Name Placeholder"
+                            android:id="@+id/nameView"
+                        android:textStyle="bold"
+                        android:layout_alignBottom="@+id/alarmButton" />
+                    <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/alarmButton"
+                            android:src="@mipmap/ic_notifications_black_24dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+                    <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/photoButton"
+                            android:src="@mipmap/ic_launcher"
+                        android:layout_below="@+id/alarmButton"
+                        android:layout_alignLeft="@+id/nameView"
+                        android:layout_alignStart="@+id/nameView" />
+                    <Button
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:text="Bedtime"
+                            android:id="@+id/bedButton"
+                        android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                        android:layout_alignTop="@+id/photoButton"
+                        android:layout_centerHorizontal="true" />
+                    <Button android:layout_width="180dp" android:layout_height="wrap_content" android:text="Awakening"
+                            android:id="@+id/awakeButton"
+                            android:layout_below="@+id/bedButton"
+                        android:textColor="#ffffffff"
+                            android:paddingTop="5dp" android:paddingBottom="5dp"
+                        android:layout_alignRight="@+id/bedButton"
+                        android:layout_alignEnd="@+id/bedButton"
+                        android:layout_alignLeft="@+id/bedButton"
+                        android:layout_alignStart="@+id/bedButton" />
+                    <Button android:layout_width="180dp" android:layout_height="wrap_content" android:text="Survey"
+                            android:id="@+id/trackButton"
+                            android:layout_below="@+id/awakeButton" android:layout_alignRight="@+id/awakeButton"
+                            android:layout_alignEnd="@+id/awakeButton"
+                        android:textColor="#ffffffff"
+                            android:paddingTop="5dp" android:paddingBottom="5dp"
+                        android:layout_alignLeft="@+id/awakeButton"
+                        android:layout_alignStart="@+id/awakeButton" />
+                </RelativeLayout>
+
+</android:android.support.v7.widget.CardView>

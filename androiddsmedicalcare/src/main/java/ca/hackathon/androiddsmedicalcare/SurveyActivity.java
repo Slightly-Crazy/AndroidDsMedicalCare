@@ -20,12 +20,12 @@ public class SurveyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
         // Ask to disable alarm in AlarmSetter
-        Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
-        disableAlarmIntent.putExtra("sender", "SurveyActivity");
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
+        //Intent disableAlarmIntent = new Intent(this, AlarmSetter.class);
+        //disableAlarmIntent.putExtra("sender", "SurveyActivity");
+        //alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, disableAlarmIntent, 0);
         // Send Intent immediately
-        AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
-        alarm.set(AlarmManager.RTC, 0, alarmIntent);
+        //AlarmManager alarm = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        //alarm.set(AlarmManager.RTC, 0, alarmIntent);
     }
 
     @Override

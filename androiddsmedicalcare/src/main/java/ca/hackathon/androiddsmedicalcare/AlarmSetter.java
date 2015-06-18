@@ -38,6 +38,8 @@ public class AlarmSetter extends BroadcastReceiver {
         this.alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
+
+
     public void setAlarm() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
